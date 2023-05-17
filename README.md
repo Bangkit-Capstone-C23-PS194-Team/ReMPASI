@@ -46,6 +46,18 @@ so if all files compeletly done, you can make a pull request !
 
 So if you just complete all of those steps, there is a button for making Pull Request (PR), it will be displayed on your ReMPASI forked repo just like this
 
-Okay, after that, scroll down and notice, there is a button for submit your Pull Request, and you must click that green colored button
+![gambar](https://github.com/Bangkit-Capstone-C23-PS194-Team/ReMPASI/assets/64621392/778d0ff5-8e9a-4cc3-a044-a9cff642d30c)
+
+Okay, after that, scroll down and notice, there is a title field and comment, this is additional, but highly recommended to fill out of your PR title and comments. There is button for submit your Pull Request, and you must click that green colored button
+
+![gambar](https://github.com/Bangkit-Capstone-C23-PS194-Team/ReMPASI/assets/64621392/ccd1ed3f-3817-4ffb-abd6-a9b166f2c1fd)
+
+
 
 Viola! you have just finished to make a pull request, then be patient to waiting your work, because there is a guy still review all of your changes, just to make sure they're on the right track and the right place :)
+
+![gambar](https://github.com/Bangkit-Capstone-C23-PS194-Team/ReMPASI/assets/64621392/b8acd91a-2f72-400f-affc-771999674a0b)
+
+So if your PR have been reviewed by maintainer, your PR status might look like this
+
+![gambar](https://github.com/Bangkit-Capstone-C23-PS194-Team/ReMPASI/assets/64621392/dc02ab9b-4a8d-45a2-8fa8-8e8f7b5c9013)
