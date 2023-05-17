@@ -1,3 +1,3 @@
 # DISCLAIMER
 
-this file and folder for the test only !
+this file and folder for the test only
