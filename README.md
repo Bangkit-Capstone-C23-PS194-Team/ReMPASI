@@ -20,7 +20,7 @@ Do not to forget this step, to create your own branch, type this command on your
 git branch <your-branch-name>
 ```
 
-well, let's move to your own branch by typing
+well, if you wanna more simply way, let's create and move to your own branch by typing
 
 ```
 git checkout -b <your-branch-name>
