@@ -1,4 +1,4 @@
-package com.caps.rempasi
+package com.caps.rempasi.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,34 +10,31 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.caps.rempasi.ui.theme.ReMPASITheme
+import com.caps.rempasi.presentation.ui.RempasiApp
+import com.caps.rempasi.presentation.ui.theme.ReMPASITheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ReMPASITheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    RempasiApp()
                 }
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     ReMPASITheme {
-        Greeting("Android")
+        RempasiApp()
     }
 }
