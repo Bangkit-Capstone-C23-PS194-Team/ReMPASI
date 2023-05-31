@@ -28,13 +28,14 @@ fun ProfileScreen(
     email: String,
     profile: String,
     navigateBack: () -> Unit,
+    logOut: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Scaffold(
         topBar = {
             JetTopAppBar(
                 showBackButton = true,
-                pageTitle = "About",
+                pageTitle = "Profil",
                 onBackClicked = navigateBack,
             )
         }
@@ -74,7 +75,7 @@ fun ProfileScreen(
                 )
                 Spacer(modifier = Modifier.height(40.dp))
                 ButtonLeadingIcon(textTitle = "Keluar", icon = R.drawable.logout) {
-                    navigateBack()
+                    logOut()
                 }
             }
         }
@@ -89,6 +90,8 @@ fun ProfilePreview() {
             accountName = "Akhmadheta Hafid",
             email = "akhmadheta097@gmail.com",
             profile = "https://lh3.googleusercontent.com/ogw/AOLn63F1tQYm1KpakU3JdGmPzMgLR017JuwtOXvv5yL6cA=s32-c-mo",
-            navigateBack = { })
+            navigateBack = { },
+            logOut = {}
+        )
     }
 }

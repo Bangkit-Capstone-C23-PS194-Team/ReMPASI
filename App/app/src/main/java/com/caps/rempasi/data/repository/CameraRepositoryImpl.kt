@@ -56,7 +56,7 @@ class CameraRepositoryImpl @Inject constructor(
             put(MediaStore.MediaColumns.DISPLAY_NAME, name)
             put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
             if (Build.VERSION.SDK_INT > 28) {
-                put(MediaStore.Images.Media.RELATIVE_PATH,"Pictures/ReMPASI-App-Images")
+                put(MediaStore.Images.Media.RELATIVE_PATH,"Pictures/ReMPASI")
             }
         }
 

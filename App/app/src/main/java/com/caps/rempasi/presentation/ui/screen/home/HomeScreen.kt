@@ -1,17 +1,13 @@
 package com.caps.rempasi.presentation.ui.screen.home
 
 import android.Manifest
-import android.net.Uri
 import android.os.Build
 import androidx.camera.core.ImageCapture.FLASH_MODE_OFF
 import androidx.camera.core.ImageCapture.FLASH_MODE_ON
 import androidx.camera.view.PreviewView
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,6 +25,7 @@ import com.caps.rempasi.presentation.ui.components.ActionCameraButton
 import com.caps.rempasi.presentation.ui.components.JetTopAppBar
 import com.caps.rempasi.presentation.ui.screen.SharedCameraResultViewModel
 import com.caps.rempasi.presentation.ui.screen.camera.ImageResult
+import com.caps.rempasi.presentation.ui.theme.Typography
 import com.caps.rempasi.utils.ImageHelper.toFile
 import com.caps.rempasi.utils.UIHelper.showToastPermission
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
@@ -38,19 +35,11 @@ import com.google.accompanist.permissions.rememberMultiplePermissionsState
 @Composable
 fun HomeScreen(
     sharedViewModel: SharedCameraResultViewModel,
-    viewModel: HomeViewModel = hiltViewModel(),
     modifier: Modifier = Modifier,
+    viewModel: HomeViewModel = hiltViewModel(),
+    navigateToProfile: () -> Unit,
     navigateToResult: () -> Unit,
 ) {
-//    if (belom login) {
-//        LaunchedEffect(key1 = true) {
-//            navController.popBackStack()
-//            navController.navigate(Screen.Auth.route)
-//        }
-//    } else {
-//
-//    }
-
     val permissions = if (Build.VERSION.SDK_INT <= 28) {
         listOf(
             Manifest.permission.CAMERA,
@@ -79,7 +68,7 @@ fun HomeScreen(
     Scaffold(
         topBar = {
             JetTopAppBar(
-                onAboutPageClicked = {},
+                onAboutPageClicked = navigateToProfile,
                 showBackButton = false,
             )
         }
@@ -167,6 +156,14 @@ fun HomeScreen(
                         }
                     }
                 }
+                Spacer(modifier = Modifier.height(16.dp))
+                Text(
+                    text = "Pastikan semua bahan makanan terlihat dalam kamera ya Moms",
+                    style = Typography.bodyMedium,
+                    modifier = Modifier
+                        .padding(horizontal = 16.dp)
+                        .fillMaxWidth()
+                )
             }
         }
     }

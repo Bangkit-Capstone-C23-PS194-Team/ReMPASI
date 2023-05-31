@@ -1,52 +1,35 @@
 package com.caps.rempasi.presentation.ui.screen.camera
 
-import android.net.Uri
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.caps.rempasi.R
-import com.caps.rempasi.presentation.ui.components.ActionCameraButton
+import com.caps.rempasi.presentation.ui.components.ButtonLeadingIcon
 import com.caps.rempasi.presentation.ui.components.JetTopAppBar
 import com.caps.rempasi.presentation.ui.screen.SharedCameraResultViewModel
-import com.caps.rempasi.utils.ImageHelper.toFile
+import com.caps.rempasi.presentation.ui.theme.Typography
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CameraResultScreen(
-    viewModel: SharedCameraResultViewModel,
+    sharedViewModel: SharedCameraResultViewModel,
     modifier: Modifier = Modifier,
+    navigateToProfile: () -> Unit,
     navigateBack: () -> Unit,
 ) {
-    val configuration = LocalConfiguration.current
-    val screenWidth = configuration.screenWidthDp.dp
+    val imageResult = sharedViewModel.imageResult
 
-    val imageResult = viewModel.imageResult
-
-    LaunchedEffect(key1 = imageResult) {
-        if (imageResult != null) {
-            Log.d("ada", "${imageResult.imageUri}")
-        } else {
-            Log.d("ada", "tidak ada ${imageResult?.imageUri}")
-        }
-    }
     Scaffold(
         topBar = {
             JetTopAppBar(
-                onAboutPageClicked = {},
+                onAboutPageClicked = navigateToProfile,
                 showBackButton = false,
             )
         }
@@ -55,23 +38,44 @@ fun CameraResultScreen(
             modifier = modifier
                 .padding(it)
                 .padding(16.dp)
-                .fillMaxSize()
+                .fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Box(
-                modifier = Modifier
-                    .height(screenWidth * 4 / 3)
-                    .width(screenWidth)
+                modifier = Modifier.fillMaxWidth()
             ) {
                 Image(
                     painter = rememberAsyncImagePainter(imageResult?.imageUri),
                     contentDescription = null
                 )
-                ActionCameraButton(
-                    icon = R.drawable.close,
-                    contentDescription = "Kembali"
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.End
                 ) {
-                    navigateBack()
+                    IconButton(
+                        onClick = navigateBack,
+                        modifier = Modifier
+                            .size(40.dp)
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.close),
+                            contentDescription = "Kembali",
+                            modifier = Modifier.size(24.dp),
+                            tint = Color.White
+                        )
+                    }
                 }
+            }
+            Spacer(modifier = Modifier.height(16.dp))
+            Text(
+                text = "Pastikan semua bahan makanan terlihat dalam kamera ya Moms",
+                style = Typography.bodyMedium,
+                modifier = Modifier
+                    .fillMaxWidth()
+            )
+            Spacer(modifier = Modifier.height(32.dp))
+            ButtonLeadingIcon(textTitle = "Temukan Resep", icon = R.drawable.find_recipe) {
+
             }
         }
     }

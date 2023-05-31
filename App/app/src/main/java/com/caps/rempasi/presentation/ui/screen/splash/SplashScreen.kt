@@ -30,8 +30,7 @@ fun SplashScreen(
             is UIState.Loading -> splashViewModel.getStartDestination()
             is UIState.Success -> {
                 LaunchedEffect(key1 = true) {
-                    start.let { firstScreenCallback(it.data)
-                    }
+                    firstScreenCallback(start.data)
                 }
             }
             is UIState.Error -> {
