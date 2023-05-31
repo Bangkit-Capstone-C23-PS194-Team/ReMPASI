@@ -37,9 +37,9 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 @ExperimentalPagerApi
 @Composable
 fun WelcomeScreen(
-    name: String,
-    navController: NavHostController,
     modifier: Modifier = Modifier,
+    name: String,
+    openHomeScreenCallback: () -> Unit,
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -68,8 +68,7 @@ fun WelcomeScreen(
         )
         Spacer(modifier = Modifier.height(64.dp))
         ButtonEndIcon(textTitle = "Ambil foto sekarang") {
-            navController.popBackStack()
-            navController.navigate(Screen.Home.route)
+            openHomeScreenCallback()
         }
     }
 }
@@ -79,6 +78,6 @@ fun WelcomeScreen(
 @Composable
 fun WelcomePreview() {
     ReMPASITheme {
-        WelcomeScreen(name = "Hafid", navController = rememberNavController())
+        WelcomeScreen(name = "Hafid") {}
     }
 }

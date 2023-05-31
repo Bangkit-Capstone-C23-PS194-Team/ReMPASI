@@ -6,9 +6,7 @@ sealed class Screen(val route: String) {
     object Onboarding : Screen("onboarding")
     object Splash : Screen("splash")
     object Home : Screen("home_page")
-    object CameraResult : Screen("camera_result{imageResult}") {
-        fun createRoute(imageResult: ImageResult) = "detail_recipe_page/$imageResult"
-    }
+    object CameraResult : Screen("camera_result")
     object Auth : Screen("auth_screen")
     object Welcome : Screen("welcome_screen")
 

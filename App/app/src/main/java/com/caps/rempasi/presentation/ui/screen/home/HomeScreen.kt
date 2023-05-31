@@ -1,6 +1,7 @@
 package com.caps.rempasi.presentation.ui.screen.home
 
 import android.Manifest
+import android.net.Uri
 import android.os.Build
 import androidx.camera.core.ImageCapture.FLASH_MODE_OFF
 import androidx.camera.core.ImageCapture.FLASH_MODE_ON
@@ -23,11 +24,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
 import com.caps.rempasi.R
 import com.caps.rempasi.presentation.ui.components.ActionCameraButton
 import com.caps.rempasi.presentation.ui.components.JetTopAppBar
-import com.caps.rempasi.presentation.ui.navigation.Screen
+import com.caps.rempasi.presentation.ui.screen.SharedCameraResultViewModel
+import com.caps.rempasi.presentation.ui.screen.camera.ImageResult
+import com.caps.rempasi.utils.ImageHelper.toFile
 import com.caps.rempasi.utils.UIHelper.showToastPermission
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
@@ -35,9 +37,10 @@ import com.google.accompanist.permissions.rememberMultiplePermissionsState
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalPermissionsApi::class)
 @Composable
 fun HomeScreen(
+    sharedViewModel: SharedCameraResultViewModel,
+    viewModel: HomeViewModel = hiltViewModel(),
     modifier: Modifier = Modifier,
-    navController: NavHostController,
-    viewModel: HomeViewModel = hiltViewModel()
+    navigateToResult: () -> Unit,
 ) {
 //    if (belom login) {
 //        LaunchedEffect(key1 = true) {
@@ -95,7 +98,7 @@ fun HomeScreen(
                     AndroidView(
                         factory = {
                             previewView = PreviewView(it)
-                            viewModel.showCameraPreview(previewView, lifecycleOwner)
+                            viewModel.showCameraPreview(previewView, lifecycleOwner, context)
                             previewView
                         },
                         modifier = Modifier
@@ -124,7 +127,16 @@ fun HomeScreen(
                             IconButton(
                                 onClick = {
                                     if (permissionState.allPermissionsGranted) {
-                                        viewModel.captureAndSave(context)
+                                        viewModel.captureAndSave(context) {
+                                            sharedViewModel.postImageResult(
+                                                ImageResult(
+                                                    it.toFile(
+                                                        context
+                                                    ), it
+                                                )
+                                            )
+                                            navigateToResult()
+                                        }
                                     } else {
                                         showToastPermission(context)
                                     }
@@ -143,7 +155,7 @@ fun HomeScreen(
                             }
                             ActionCameraButton(
                                 icon = if (currentFlashMode == FLASH_MODE_ON) R.drawable.flash_on else R.drawable.flash_off,
-                                contentDescription = "Ubah Kamera"
+                                contentDescription = "Ubah cahaya latar kamera"
                             ) {
                                 currentFlashMode = if (currentFlashMode == FLASH_MODE_ON) {
                                     FLASH_MODE_OFF

@@ -12,7 +12,6 @@ import java.util.*
 
 object ImageHelper {
     const val FILENAME_FORMAT = "dd-MMM-yyyy"
-    const val IMAGE_RESULT_KEY = "image_result"
 
     private const val MAXIMAL_SIZE = 1000000
 

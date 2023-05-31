@@ -1,8 +1,6 @@
 package com.caps.rempasi.presentation.ui.screen.onboarding
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -24,8 +22,8 @@ import com.google.accompanist.pager.*
 @ExperimentalAnimationApi
 @Composable
 fun OnBoardingScreen(
-    navController: NavHostController,
-    onboardingViewModel: OnboardingViewModel = hiltViewModel()
+    onboardingViewModel: OnboardingViewModel = hiltViewModel(),
+    learnMoreCallback: () -> Unit,
 ) {
     val pages = listOf(
         OnBoardingPageData.First,
@@ -55,8 +53,7 @@ fun OnBoardingScreen(
             pagerState = pagerState
         ) {
             onboardingViewModel.saveOnBoardingState(completed = true)
-            navController.popBackStack()
-            navController.navigate(Screen.Auth.route)
+            learnMoreCallback()
         }
         HorizontalPagerIndicator(
             modifier = Modifier

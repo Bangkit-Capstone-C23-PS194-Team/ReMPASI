@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "582862803314",
+    "project_id": "rempasi",
+    "storage_bucket": "rempasi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:582862803314:android:416069a9fc424af8680deb",
+        "android_client_info": {
+          "package_name": "com.caps.rempasi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "582862803314-4jjnvhn9akfd1vqi0bltqsu7posvt3tu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFLyBvJWSzCifOiHacUiWihP6l2lXq_KQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "582862803314-4jjnvhn9akfd1vqi0bltqsu7posvt3tu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -10,27 +10,21 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
-import com.caps.rempasi.presentation.ui.theme.Typography
 import com.caps.rempasi.R
-import com.caps.rempasi.presentation.ui.navigation.Screen
 import com.caps.rempasi.presentation.ui.theme.ReMPASITheme
+import com.caps.rempasi.presentation.ui.theme.Typography
 
 @Composable
 fun AuthScreen(
     modifier: Modifier = Modifier,
-    navController: NavHostController,
+    openWelcomeCallback: () -> Unit,
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -59,8 +53,7 @@ fun AuthScreen(
         Spacer(modifier = Modifier.height(64.dp))
         Button(
             onClick = {
-                navController.popBackStack()
-                navController.navigate(Screen.Welcome.route)
+               openWelcomeCallback()
             },
             modifier = Modifier
                 .fillMaxWidth()
@@ -98,6 +91,6 @@ fun AuthScreen(
 @Composable
 fun AuthPreview() {
     ReMPASITheme {
-        AuthScreen(navController = rememberNavController())
+        AuthScreen(openWelcomeCallback = {})
     }
 }
