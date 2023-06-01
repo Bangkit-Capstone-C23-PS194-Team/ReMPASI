@@ -7,10 +7,7 @@ import androidx.camera.core.ImageCapture.FLASH_MODE_ON
 import androidx.camera.view.PreviewView
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,11 +20,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
 import com.caps.rempasi.R
 import com.caps.rempasi.presentation.ui.components.ActionCameraButton
 import com.caps.rempasi.presentation.ui.components.JetTopAppBar
-import com.caps.rempasi.presentation.ui.navigation.Screen
+import com.caps.rempasi.presentation.ui.screen.SharedCameraResultViewModel
+import com.caps.rempasi.presentation.ui.screen.camera.ImageResult
+import com.caps.rempasi.presentation.ui.theme.Typography
+import com.caps.rempasi.utils.ImageHelper.toFile
 import com.caps.rempasi.utils.UIHelper.showToastPermission
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
@@ -35,19 +34,12 @@ import com.google.accompanist.permissions.rememberMultiplePermissionsState
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalPermissionsApi::class)
 @Composable
 fun HomeScreen(
+    sharedViewModel: SharedCameraResultViewModel,
     modifier: Modifier = Modifier,
-    navController: NavHostController,
-    viewModel: HomeViewModel = hiltViewModel()
+    viewModel: HomeViewModel = hiltViewModel(),
+    navigateToProfile: () -> Unit,
+    navigateToResult: () -> Unit,
 ) {
-//    if (belom login) {
-//        LaunchedEffect(key1 = true) {
-//            navController.popBackStack()
-//            navController.navigate(Screen.Auth.route)
-//        }
-//    } else {
-//
-//    }
-
     val permissions = if (Build.VERSION.SDK_INT <= 28) {
         listOf(
             Manifest.permission.CAMERA,
@@ -76,7 +68,7 @@ fun HomeScreen(
     Scaffold(
         topBar = {
             JetTopAppBar(
-                onAboutPageClicked = {},
+                onAboutPageClicked = navigateToProfile,
                 showBackButton = false,
             )
         }
@@ -95,7 +87,7 @@ fun HomeScreen(
                     AndroidView(
                         factory = {
                             previewView = PreviewView(it)
-                            viewModel.showCameraPreview(previewView, lifecycleOwner)
+                            viewModel.showCameraPreview(previewView, lifecycleOwner, context)
                             previewView
                         },
                         modifier = Modifier
@@ -124,7 +116,16 @@ fun HomeScreen(
                             IconButton(
                                 onClick = {
                                     if (permissionState.allPermissionsGranted) {
-                                        viewModel.captureAndSave(context)
+                                        viewModel.captureAndSave(context) {
+                                            sharedViewModel.postImageResult(
+                                                ImageResult(
+                                                    it.toFile(
+                                                        context
+                                                    ), it
+                                                )
+                                            )
+                                            navigateToResult()
+                                        }
                                     } else {
                                         showToastPermission(context)
                                     }
@@ -143,7 +144,7 @@ fun HomeScreen(
                             }
                             ActionCameraButton(
                                 icon = if (currentFlashMode == FLASH_MODE_ON) R.drawable.flash_on else R.drawable.flash_off,
-                                contentDescription = "Ubah Kamera"
+                                contentDescription = "Ubah cahaya latar kamera"
                             ) {
                                 currentFlashMode = if (currentFlashMode == FLASH_MODE_ON) {
                                     FLASH_MODE_OFF
@@ -155,6 +156,14 @@ fun HomeScreen(
                         }
                     }
                 }
+                Spacer(modifier = Modifier.height(16.dp))
+                Text(
+                    text = "Pastikan semua bahan makanan terlihat dalam kamera ya Moms",
+                    style = Typography.bodyMedium,
+                    modifier = Modifier
+                        .padding(horizontal = 16.dp)
+                        .fillMaxWidth()
+                )
             }
         }
     }

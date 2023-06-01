@@ -14,32 +14,23 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.caps.rempasi.R
 import com.caps.rempasi.presentation.ui.common.UIState
-import com.caps.rempasi.presentation.ui.navigation.Screen
 import com.caps.rempasi.presentation.ui.theme.ReMPASITheme
 import com.caps.rempasi.presentation.ui.theme.White
 
 @Composable
 fun SplashScreen(
     modifier: Modifier = Modifier,
-    navHostController: NavHostController,
-    splashViewModel: SplashViewModel = hiltViewModel()
+    splashViewModel: SplashViewModel = hiltViewModel(),
+    firstScreenCallback: (String) -> Unit,
 ) {
     splashViewModel.startDestination.collectAsState(initial = UIState.Loading).value.let { start ->
         when (start) {
             is UIState.Loading -> splashViewModel.getStartDestination()
             is UIState.Success -> {
                 LaunchedEffect(key1 = true) {
-                    start.let { screen ->
-                        navHostController.navigate(
-                            screen.data
-                        ) {
-                            popUpTo(Screen.Splash.route) { inclusive = true }
-                        }
-                    }
+                    firstScreenCallback(start.data)
                 }
             }
             is UIState.Error -> {
@@ -76,6 +67,6 @@ fun SplashScreen(
 @Composable
 fun SplashPrev() {
     ReMPASITheme() {
-        SplashScreen(navHostController = rememberNavController())
+        SplashScreen(firstScreenCallback = {})
     }
 }

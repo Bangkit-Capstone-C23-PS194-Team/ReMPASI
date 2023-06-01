@@ -1,5 +1,6 @@
 package com.caps.rempasi.presentation.ui.screen.auth
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -8,30 +9,37 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
-import com.caps.rempasi.presentation.ui.theme.Typography
 import com.caps.rempasi.R
-import com.caps.rempasi.presentation.ui.navigation.Screen
-import com.caps.rempasi.presentation.ui.theme.ReMPASITheme
+import com.caps.rempasi.presentation.ui.theme.Typography
 
 @Composable
 fun AuthScreen(
+    state: SignInState,
     modifier: Modifier = Modifier,
-    navController: NavHostController,
+    onSignInClick: () -> Unit,
 ) {
+
+    val context = LocalContext.current
+    LaunchedEffect(key1 = state.signInError) {
+        state.signInError?.let { error ->
+            Toast.makeText(
+                context,
+                error,
+                Toast.LENGTH_LONG
+            ).show()
+        }
+    }
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
@@ -58,10 +66,7 @@ fun AuthScreen(
         )
         Spacer(modifier = Modifier.height(64.dp))
         Button(
-            onClick = {
-                navController.popBackStack()
-                navController.navigate(Screen.Welcome.route)
-            },
+            onClick = onSignInClick,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(50.dp)
@@ -91,13 +96,5 @@ fun AuthScreen(
                 )
             }
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun AuthPreview() {
-    ReMPASITheme {
-        AuthScreen(navController = rememberNavController())
     }
 }

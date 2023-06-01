@@ -1,8 +1,7 @@
 package com.caps.rempasi.presentation.ui.screen.home
 
 import android.content.Context
-import androidx.camera.core.ImageCapture
-import androidx.camera.core.ImageCapture.FlashMode
+import android.net.Uri
 import androidx.camera.view.PreviewView
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
@@ -19,18 +18,20 @@ class HomeViewModel @Inject constructor(
     fun showCameraPreview(
         previewView: PreviewView,
         lifecycleOwner: LifecycleOwner,
+        context: Context,
     ){
         viewModelScope.launch {
             cameraRepository.showCameraPreview(
                 previewView,
                 lifecycleOwner,
+                context
             )
         }
     }
 
-    fun captureAndSave(context: Context){
+    fun captureAndSave(context: Context, successCallback: (Uri) -> Unit){
         viewModelScope.launch {
-            cameraRepository.captureAndSaveImage(context)
+            cameraRepository.captureAndSaveImage(context, successCallback)
         }
     }
 

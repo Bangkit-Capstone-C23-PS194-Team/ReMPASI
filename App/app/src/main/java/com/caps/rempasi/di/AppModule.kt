@@ -1,6 +1,7 @@
 package com.caps.rempasi.di
 
 import android.app.Application
+import android.media.SoundPool
 import androidx.camera.core.*
 import androidx.camera.core.ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST
 import androidx.camera.lifecycle.ProcessCameraProvider
@@ -43,6 +44,14 @@ object AppModule {
 //            .setTargetAspectRatio(AspectRatio.RATIO_4_3)
 //            .build()
 //    }
+
+    @Provides
+    @Singleton
+    fun provideSoundPool(): SoundPool {
+        return SoundPool.Builder()
+            .setMaxStreams(1)
+            .build()
+    }
 
     @Provides
     @Singleton

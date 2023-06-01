@@ -1,31 +1,32 @@
 package com.caps.rempasi.presentation.ui.screen.onboarding
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.animation.fadeIn
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
 import com.caps.rempasi.R
 import com.caps.rempasi.presentation.ui.components.ButtonEndIcon
 import com.caps.rempasi.presentation.ui.components.OnboardingContent
-import com.caps.rempasi.presentation.ui.navigation.Screen
 import com.caps.rempasi.presentation.ui.theme.Red
 import com.caps.rempasi.presentation.ui.theme.RedSecondary
 import com.caps.rempasi.utils.OnBoardingPageData
-import com.google.accompanist.pager.*
+import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.HorizontalPager
+import com.google.accompanist.pager.HorizontalPagerIndicator
+import com.google.accompanist.pager.rememberPagerState
 
 @ExperimentalPagerApi
 @ExperimentalAnimationApi
 @Composable
 fun OnBoardingScreen(
-    navController: NavHostController,
-    onboardingViewModel: OnboardingViewModel = hiltViewModel()
+    onboardingViewModel: OnboardingViewModel = hiltViewModel(),
+    learnMoreCallback: () -> Unit,
 ) {
     val pages = listOf(
         OnBoardingPageData.First,
@@ -55,8 +56,7 @@ fun OnBoardingScreen(
             pagerState = pagerState
         ) {
             onboardingViewModel.saveOnBoardingState(completed = true)
-            navController.popBackStack()
-            navController.navigate(Screen.Auth.route)
+            learnMoreCallback()
         }
         HorizontalPagerIndicator(
             modifier = Modifier
