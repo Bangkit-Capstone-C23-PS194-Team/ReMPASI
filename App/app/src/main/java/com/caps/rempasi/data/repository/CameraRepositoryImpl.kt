@@ -40,6 +40,8 @@ class CameraRepositoryImpl @Inject constructor(
         imageCapture?.flashMode = flashMode
     }
 
+    override fun getFlashMode(): Int = flashMode
+
     override suspend fun captureAndSaveImage(context: Context, successCallback: (Uri) -> Unit) {
 //        play sound
         if (soundPoolLoaded) {
@@ -87,7 +89,7 @@ class CameraRepositoryImpl @Inject constructor(
                 override fun onError(exception: ImageCaptureException) {
                     Toast.makeText(
                         context,
-                        "some error occurred ${exception.message}",
+                        "Terjadi kesalahan ${exception.message}",
                         Toast.LENGTH_LONG
                     ).show()
                 }

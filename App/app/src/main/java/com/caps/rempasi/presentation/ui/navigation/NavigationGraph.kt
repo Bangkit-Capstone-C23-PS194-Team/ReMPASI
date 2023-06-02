@@ -103,7 +103,7 @@ fun NavigationGraph(
                 if (state.isSignInSuccessful) {
                     Toast.makeText(
                         appContext,
-                        "Sign in successful",
+                        "Login Berhasil",
                         Toast.LENGTH_LONG
                     ).show()
 
@@ -174,7 +174,7 @@ fun NavigationGraph(
                             googleAuthUiClient.signOut()
                             Toast.makeText(
                                 appContext,
-                                "Signed out",
+                                "Logout Berhasil",
                                 Toast.LENGTH_LONG
                             ).show()
 

@@ -68,7 +68,7 @@ fun CameraResultScreen(
             }
             Spacer(modifier = Modifier.height(16.dp))
             Text(
-                text = "Pastikan semua bahan makanan terlihat dalam kamera ya Moms",
+                text = "Pastikan semua bahan makanan tidak saling tertumpuk dan terlihat dalam kamera ya Moms",
                 style = Typography.bodyMedium,
                 modifier = Modifier
                     .fillMaxWidth()

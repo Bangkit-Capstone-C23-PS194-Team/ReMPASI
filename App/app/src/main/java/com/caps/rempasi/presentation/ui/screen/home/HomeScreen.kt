@@ -63,7 +63,7 @@ fun HomeScreen(
     val screenWidth = configuration.screenWidthDp.dp
     var previewView: PreviewView
 
-    var currentFlashMode by remember { mutableStateOf(FLASH_MODE_ON) }
+    var currentFlashMode by remember { mutableStateOf(viewModel.getFlashMode()) }
 
     Scaffold(
         topBar = {
@@ -158,7 +158,7 @@ fun HomeScreen(
                 }
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(
-                    text = "Pastikan semua bahan makanan terlihat dalam kamera ya Moms",
+                    text = "Pastikan semua bahan makanan tidak saling tertumpuk dan terlihat dalam kamera ya Moms",
                     style = Typography.bodyMedium,
                     modifier = Modifier
                         .padding(horizontal = 16.dp)
