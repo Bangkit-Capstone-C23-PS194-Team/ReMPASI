@@ -12,6 +12,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.caps.rempasi.R
 import com.caps.rempasi.presentation.ui.components.ButtonLeadingIcon
+import com.caps.rempasi.presentation.ui.components.CaptureGuideline
 import com.caps.rempasi.presentation.ui.components.JetTopAppBar
 import com.caps.rempasi.presentation.ui.screen.SharedCameraResultViewModel
 import com.caps.rempasi.presentation.ui.theme.Typography
@@ -66,14 +67,8 @@ fun CameraResultScreen(
                     }
                 }
             }
+            CaptureGuideline()
             Spacer(modifier = Modifier.height(16.dp))
-            Text(
-                text = "Pastikan semua bahan makanan tidak saling tertumpuk dan terlihat dalam kamera ya Moms",
-                style = Typography.bodyMedium,
-                modifier = Modifier
-                    .fillMaxWidth()
-            )
-            Spacer(modifier = Modifier.height(32.dp))
             ButtonLeadingIcon(textTitle = "Temukan Resep", icon = R.drawable.find_recipe) {
 
             }

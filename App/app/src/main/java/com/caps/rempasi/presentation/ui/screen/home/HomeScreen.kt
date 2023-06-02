@@ -18,10 +18,12 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.caps.rempasi.R
 import com.caps.rempasi.presentation.ui.components.ActionCameraButton
+import com.caps.rempasi.presentation.ui.components.CaptureGuideline
 import com.caps.rempasi.presentation.ui.components.JetTopAppBar
 import com.caps.rempasi.presentation.ui.screen.SharedCameraResultViewModel
 import com.caps.rempasi.presentation.ui.screen.camera.ImageResult
@@ -156,14 +158,9 @@ fun HomeScreen(
                         }
                     }
                 }
-                Spacer(modifier = Modifier.height(16.dp))
-                Text(
-                    text = "Pastikan semua bahan makanan tidak saling tertumpuk dan terlihat dalam kamera ya Moms",
-                    style = Typography.bodyMedium,
-                    modifier = Modifier
-                        .padding(horizontal = 16.dp)
-                        .fillMaxWidth()
-                )
+                Box(modifier = Modifier.padding(horizontal = 16.dp)) {
+                    CaptureGuideline()
+                }
             }
         }
     }
