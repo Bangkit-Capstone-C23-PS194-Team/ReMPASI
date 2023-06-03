@@ -21,63 +21,45 @@ import com.caps.rempasi.presentation.ui.theme.Typography
 import com.caps.rempasi.R
 import com.caps.rempasi.presentation.ui.theme.ReMPASITheme
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProfileScreen(
     accountName: String,
     email: String,
     profile: String,
-    navigateBack: () -> Unit,
     logOut: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Scaffold(
-        topBar = {
-            JetTopAppBar(
-                showBackButton = true,
-                pageTitle = "Profil",
-                onBackClicked = navigateBack,
+    Column(
+        verticalArrangement = Arrangement.Top,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier
+            .padding(top = 24.dp)
+            .fillMaxSize(),
+    ) {
+        AsyncImage(
+            model = profile,
+            contentDescription = "Avatar",
+            modifier = Modifier
+                .border(2.dp, Red, CircleShape)
+                .padding(6.dp)
+                .clip(CircleShape)
+                .size(140.dp)
+        )
+        Spacer(modifier = Modifier.height(32.dp))
+        Text(
+            text = accountName,
+            style = Typography.headlineLarge
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        Text(
+            text = email,
+            style = Typography.bodyMedium.copy(
+                fontSize = 18.sp
             )
-        }
-    ) { paddingValues ->
-        Box(
-            modifier = modifier
-                .padding(paddingValues)
-
-        ) {
-            Column(
-                verticalArrangement = Arrangement.Top,
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier
-                    .padding(top = 24.dp)
-                    .fillMaxSize(),
-            ) {
-                AsyncImage(
-                    model = profile,
-                    contentDescription = "Avatar",
-                    modifier = Modifier
-                        .border(2.dp, Red, CircleShape)
-                        .padding(6.dp)
-                        .clip(CircleShape)
-                        .size(140.dp)
-                )
-                Spacer(modifier = Modifier.height(32.dp))
-                Text(
-                    text = accountName,
-                    style = Typography.headlineLarge
-                )
-                Spacer(modifier = Modifier.height(8.dp))
-                Text(
-                    text = email,
-                    style = Typography.bodyMedium.copy(
-                        fontSize = 18.sp
-                    )
-                )
-                Spacer(modifier = Modifier.height(40.dp))
-                ButtonLeadingIcon(textTitle = "Keluar", icon = R.drawable.logout) {
-                    logOut()
-                }
-            }
+        )
+        Spacer(modifier = Modifier.height(40.dp))
+        ButtonLeadingIcon(textTitle = "Keluar", icon = R.drawable.logout) {
+            logOut()
         }
     }
 }
@@ -90,7 +72,6 @@ fun ProfilePreview() {
             accountName = "Akhmadheta Hafid",
             email = "akhmadheta097@gmail.com",
             profile = "https://lh3.googleusercontent.com/ogw/AOLn63F1tQYm1KpakU3JdGmPzMgLR017JuwtOXvv5yL6cA=s32-c-mo",
-            navigateBack = { },
             logOut = {}
         )
     }

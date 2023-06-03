@@ -23,76 +23,60 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.caps.rempasi.presentation.ui.theme.Typography
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailContent(
     name: String,
     thumbnail: Int,
     ingredients: List<String>,
     steps: List<String>,
-    navigateBack: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
 
-    Scaffold(
-        topBar = {
-            JetTopAppBar(
-                showBackButton = true,
-                pageTitle = "Detail Resep",
-                onBackClicked = navigateBack,
-            )
-        },
-    ) { paddingValues ->
-        Box(
-            modifier = modifier.padding(paddingValues)
-        ) {
-            Column(
-                verticalArrangement = Arrangement.spacedBy(16.dp),
-                modifier = Modifier
-                    .verticalScroll(rememberScrollState())
-                    .padding(16.dp),
-            ) {
-                Image(
-                    painter = painterResource(id = thumbnail),
-                    contentDescription = "thumbnail $name",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(243.dp)
-                        .shadow(
-                            elevation = 6.dp,
-                            shape = RectangleShape
-                        )
-                        .clip(
-                            shape = RoundedCornerShape(5.dp)
-                        )
+    Column(
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+        modifier = modifier
+            .verticalScroll(rememberScrollState())
+            .padding(16.dp),
+    ) {
+        Image(
+            painter = painterResource(id = thumbnail),
+            contentDescription = "thumbnail $name",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(243.dp)
+                .shadow(
+                    elevation = 6.dp,
+                    shape = RectangleShape
                 )
-                Text(text = name, style = Typography.headlineLarge)
-                DetailSection(title = "Bahan-bahan") {
-                    ingredients.forEach { item ->
-                        Row(
-                            modifier = Modifier.padding(bottom = 4.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Box(
-                                modifier = Modifier
-                                    .size(4.dp)
-                                    .background(Color.Black, CircleShape)
-                            )
-                            Spacer(modifier = Modifier.width(8.dp))
-                            Text(
-                                text = item,
-                                style = Typography.bodyMedium
-                            )
-                        }
-                    }
+                .clip(
+                    shape = RoundedCornerShape(5.dp)
+                )
+        )
+        Text(text = name, style = Typography.headlineLarge)
+        DetailSection(title = "Bahan-bahan") {
+            ingredients.forEach { item ->
+                Row(
+                    modifier = Modifier.padding(bottom = 4.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .size(4.dp)
+                            .background(Color.Black, CircleShape)
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(
+                        text = item,
+                        style = Typography.bodyMedium
+                    )
                 }
-                DetailSection(title = "Cara Membuat") {
-                    for ((index, item) in steps.withIndex()) {
-                        val itemNumber = index + 1
-                        ItemStep(number = itemNumber, step = item)
-                    }
-                }
+            }
+        }
+        DetailSection(title = "Cara Membuat") {
+            for ((index, item) in steps.withIndex()) {
+                val itemNumber = index + 1
+                ItemStep(number = itemNumber, step = item)
             }
         }
     }

@@ -43,7 +43,7 @@ fun OnBoardingScreen(
             .padding(top = 48.dp)
     ) {
         HorizontalPager(
-            modifier = Modifier.weight(7f),
+            modifier = Modifier.weight(12f),
             count = 4,
             state = pagerState,
             verticalAlignment = Alignment.CenterVertically

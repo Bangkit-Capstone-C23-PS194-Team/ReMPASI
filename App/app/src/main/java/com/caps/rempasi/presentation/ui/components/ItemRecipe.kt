@@ -1,13 +1,13 @@
 package com.caps.rempasi.presentation.ui.components
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Icon
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -18,6 +18,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.caps.rempasi.presentation.ui.theme.ReMPASITheme
 import com.caps.rempasi.R
 import com.caps.rempasi.presentation.ui.theme.Typography
@@ -26,12 +27,15 @@ import com.caps.rempasi.presentation.ui.theme.Typography
 @Composable
 fun ItemRecipe(
     id: Int,
-    thumbnail: Int,
+    thumbnail: String,
     title: String,
     description: List<String>,
+    isSaved: Boolean,
     onItemClicked: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    var currentSaved by remember { mutableStateOf(isSaved) }
+
     Surface(
         onClick = { onItemClicked(id) },
         color = White,
@@ -44,15 +48,22 @@ fun ItemRecipe(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.padding(4.dp)
         ) {
-            Image(
-                painter = painterResource(id = thumbnail),
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
-                modifier = modifier
-                    .width(75.dp)
-                    .height(75.dp)
-                    .clip(RoundedCornerShape(5.dp))
-            )
+            Box() {
+                AsyncImage(
+                    model = thumbnail,
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop,
+                    modifier = modifier
+                        .width(75.dp)
+                        .height(75.dp)
+                        .clip(RoundedCornerShape(5.dp))
+                )
+                Icon(
+                    painter = if (currentSaved) painterResource(id = R.drawable.bookmark) else painterResource(id = R.drawable.bookmark_outlined),
+                    contentDescription = null,
+                    tint = Red
+                )
+            }
             Spacer(modifier = Modifier.width(16.dp))
             Column(
                 modifier = Modifier.fillMaxHeight(),
@@ -81,10 +92,10 @@ fun ItemRecipe(
 @Preview(showBackground = true)
 @Composable
 fun ItemPreview() {
-    ReMPASITheme() {
+    ReMPASITheme {
         ItemRecipe(
             id = 1,
-            thumbnail = R.drawable.bubur_hati_ayam,
+            thumbnail = "https://res.cloudinary.com/dk0z4ums3/image/upload/v1638252657/attached_image/cara-menghangatkan-mpasi-agar-kualitasnya-tetap-terjaga-0-alodokter.jpg",
             title = "Bubur Hati Ayam, Wortel, dan Brokoli",
             description = listOf(
                 "1 hati ayam kampung",
@@ -96,6 +107,7 @@ fun ItemPreview() {
                 "1 siung bawang putih, cingcang halus",
                 "Sejumput bawang merah goreng",
             ),
+            isSaved = false,
             onItemClicked = {}
         )
     }

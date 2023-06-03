@@ -18,7 +18,9 @@ import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 import com.caps.rempasi.R
+import javax.inject.Singleton
 
+@Singleton
 class CameraRepositoryImpl @Inject constructor(
     private val cameraProvider: ProcessCameraProvider,
     private val selector: CameraSelector,
