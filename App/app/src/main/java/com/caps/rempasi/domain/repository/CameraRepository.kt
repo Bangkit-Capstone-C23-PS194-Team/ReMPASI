@@ -16,4 +16,6 @@ interface CameraRepository {
         lifecycleOwner: LifecycleOwner,
         context: Context,
     )
+
+    fun getFlashMode(): Int
 }

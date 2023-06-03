@@ -36,15 +36,6 @@ object AppModule {
         return Preview.Builder().build()
     }
 
-//    @Provides
-//    @Singleton
-//    fun provideImageCapture(): ImageCapture {
-//        return ImageCapture.Builder()
-//            .setFlashMode(FLASH_MODE_ON)
-//            .setTargetAspectRatio(AspectRatio.RATIO_4_3)
-//            .build()
-//    }
-
     @Provides
     @Singleton
     fun provideSoundPool(): SoundPool {

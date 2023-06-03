@@ -18,7 +18,9 @@ import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 import com.caps.rempasi.R
+import javax.inject.Singleton
 
+@Singleton
 class CameraRepositoryImpl @Inject constructor(
     private val cameraProvider: ProcessCameraProvider,
     private val selector: CameraSelector,
@@ -39,6 +41,8 @@ class CameraRepositoryImpl @Inject constructor(
         this.flashMode = flashMode
         imageCapture?.flashMode = flashMode
     }
+
+    override fun getFlashMode(): Int = flashMode
 
     override suspend fun captureAndSaveImage(context: Context, successCallback: (Uri) -> Unit) {
 //        play sound
@@ -87,7 +91,7 @@ class CameraRepositoryImpl @Inject constructor(
                 override fun onError(exception: ImageCaptureException) {
                     Toast.makeText(
                         context,
-                        "some error occurred ${exception.message}",
+                        "Terjadi kesalahan ${exception.message}",
                         Toast.LENGTH_LONG
                     ).show()
                 }

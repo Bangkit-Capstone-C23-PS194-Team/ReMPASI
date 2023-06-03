@@ -41,7 +41,5 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun flipCamera() {
-
-    }
+    fun getFlashMode() = cameraRepository.getFlashMode()
 }

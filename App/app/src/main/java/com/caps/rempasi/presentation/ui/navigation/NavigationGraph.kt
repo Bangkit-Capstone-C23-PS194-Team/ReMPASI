@@ -9,16 +9,13 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import androidx.compose.ui.window.DialogProperties
 import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -106,7 +103,7 @@ fun NavigationGraph(
                 if (state.isSignInSuccessful) {
                     Toast.makeText(
                         appContext,
-                        "Sign in successful",
+                        "Login Berhasil",
                         Toast.LENGTH_LONG
                     ).show()
 
@@ -177,7 +174,7 @@ fun NavigationGraph(
                             googleAuthUiClient.signOut()
                             Toast.makeText(
                                 appContext,
-                                "Signed out",
+                                "Logout Berhasil",
                                 Toast.LENGTH_LONG
                             ).show()
 
