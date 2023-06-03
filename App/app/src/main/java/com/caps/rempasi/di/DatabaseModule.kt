@@ -23,3 +23,4 @@ object DatabaseModule {
             "recipe_db"
         ).fallbackToDestructiveMigration().build()
 }
+
