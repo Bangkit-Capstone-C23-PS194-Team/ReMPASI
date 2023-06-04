@@ -1,6 +1,5 @@
 package com.caps.rempasi.utils
 
-<<<<<<< HEAD
 import com.caps.rempasi.data.remote.response.RecipeItem
 import com.caps.rempasi.domain.model.Recipe
 
@@ -32,5 +31,3 @@ fun test() {
 
 
 }
-=======
->>>>>>> f271fe84348d8cac9a3bedf39b7ef7d98d61cd3b

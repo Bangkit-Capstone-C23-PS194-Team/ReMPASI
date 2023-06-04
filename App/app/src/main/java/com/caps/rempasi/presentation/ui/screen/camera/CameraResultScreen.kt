@@ -2,15 +2,21 @@ package com.caps.rempasi.presentation.ui.screen.camera
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.caps.rempasi.R
+import com.caps.rempasi.presentation.ui.components.ActionCameraButton
 import com.caps.rempasi.presentation.ui.components.ButtonLeadingIcon
 import com.caps.rempasi.presentation.ui.components.CaptureGuideline
 import com.caps.rempasi.presentation.ui.components.JetTopAppBar
@@ -36,23 +42,21 @@ fun CameraResultScreen(
         ) {
             Image(
                 painter = rememberAsyncImagePainter(imageResult?.imageUri),
-                contentDescription = null
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .aspectRatio(3f / 4f)
             )
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.End
             ) {
-                IconButton(
-                    onClick = navigateBack,
-                    modifier = Modifier
-                        .size(40.dp)
+                ActionCameraButton(
+                    icon = R.drawable.close,
+                    contentDescription = "Kembali"
                 ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.close),
-                        contentDescription = "Kembali",
-                        modifier = Modifier.size(24.dp),
-                        tint = Color.White
-                    )
+                    navigateBack()
                 }
             }
         }

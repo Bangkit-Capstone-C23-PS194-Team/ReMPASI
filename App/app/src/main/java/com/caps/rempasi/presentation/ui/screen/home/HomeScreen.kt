@@ -1,7 +1,11 @@
 package com.caps.rempasi.presentation.ui.screen.home
 
 import android.Manifest
+import android.net.Uri
 import android.os.Build
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.ImageCapture.FLASH_MODE_OFF
 import androidx.camera.core.ImageCapture.FLASH_MODE_ON
 import androidx.camera.view.PreviewView
@@ -28,6 +32,7 @@ import com.caps.rempasi.presentation.ui.components.JetTopAppBar
 import com.caps.rempasi.presentation.ui.screen.SharedCameraResultViewModel
 import com.caps.rempasi.presentation.ui.screen.camera.ImageResult
 import com.caps.rempasi.presentation.ui.theme.Typography
+import com.caps.rempasi.utils.ImageHelper.resizeImage
 import com.caps.rempasi.utils.ImageHelper.toFile
 import com.caps.rempasi.utils.UIHelper.showToastPermission
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
@@ -63,6 +68,21 @@ fun HomeScreen(
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp.dp
     var previewView: PreviewView
+
+    val launcherGallery =
+        rememberLauncherForActivityResult(contract = ActivityResultContracts.PickVisualMedia()) { uri: Uri? ->
+            uri?.let {
+                val resizedFile = resizeImage(context, it)
+                resizedFile?.let { file ->
+                    sharedViewModel.postImageResult(
+                        ImageResult(
+                            file, it
+                        )
+                    )
+                    navigateToResult()
+                }
+            }
+        }
 
     var currentFlashMode by remember { mutableStateOf(viewModel.getFlashMode()) }
 
@@ -103,7 +123,8 @@ fun HomeScreen(
                             icon = R.drawable.galery,
                             contentDescription = "Buka Galeri"
                         ) {
-
+                            val mediaType = ActivityResultContracts.PickVisualMedia.ImageOnly
+                            launcherGallery.launch(PickVisualMediaRequest(mediaType))
                         }
                         IconButton(
                             onClick = {
