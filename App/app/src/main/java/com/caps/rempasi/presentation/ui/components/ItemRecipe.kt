@@ -48,7 +48,7 @@ fun ItemRecipe(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.padding(4.dp)
         ) {
-            Box() {
+            Box {
                 AsyncImage(
                     model = thumbnail,
                     contentDescription = null,

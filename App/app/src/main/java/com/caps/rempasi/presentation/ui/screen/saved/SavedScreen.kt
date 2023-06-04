@@ -6,21 +6,49 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.caps.rempasi.R
 import com.caps.rempasi.data.local.entity.RecipeEntity
+import com.caps.rempasi.presentation.ui.common.UIState
 import com.caps.rempasi.presentation.ui.components.ItemRecipe
 import com.caps.rempasi.presentation.ui.components.SearchBar
-import com.caps.rempasi.R
 
 @Composable
 fun SavedScreen(
     modifier: Modifier = Modifier,
     onItemClicked: (Int) -> Unit,
+    viewModel: SavedViewModel = hiltViewModel(),
 ) {
-    NoDataSavedRecipe(modifier = modifier)
+    val query by viewModel.query
+    viewModel.uiState.collectAsState(initial = UIState.Loading).value.let { uiState ->
+        when (uiState) {
+            is UIState.Loading -> viewModel.searchUsers(query)
+            is UIState.Success -> {
+                SavedRecipe(
+                    recipes = uiState.data,
+                    query = query,
+                    onItemClicked = onItemClicked,
+                    onQueryChanged = viewModel::searchUsers,
+                    modifier = modifier
+                )
+            }
+            is UIState.Error -> {
+                Box(modifier = modifier.fillMaxWidth()) {
+                    Text(
+                        text = uiState.message,
+                        modifier = Modifier
+                            .align(Alignment.Center)
+                    )
+                }
+            }
+        }
+    }
 }
 
 @Composable

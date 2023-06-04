@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
@@ -16,10 +15,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.caps.rempasi.R
 import com.caps.rempasi.presentation.ui.theme.Red
 import com.caps.rempasi.presentation.ui.theme.RedSecondary
 import com.caps.rempasi.presentation.ui.theme.Typography
-import com.caps.rempasi.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

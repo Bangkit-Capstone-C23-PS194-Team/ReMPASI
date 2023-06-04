@@ -22,16 +22,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.caps.rempasi.R
 import com.caps.rempasi.presentation.ui.components.ActionCameraButton
 import com.caps.rempasi.presentation.ui.components.CaptureGuideline
-import com.caps.rempasi.presentation.ui.components.JetTopAppBar
 import com.caps.rempasi.presentation.ui.screen.SharedCameraResultViewModel
 import com.caps.rempasi.presentation.ui.screen.camera.ImageResult
-import com.caps.rempasi.presentation.ui.theme.Typography
 import com.caps.rempasi.utils.ImageHelper.resizeImage
 import com.caps.rempasi.utils.ImageHelper.toFile
 import com.caps.rempasi.utils.UIHelper.showToastPermission

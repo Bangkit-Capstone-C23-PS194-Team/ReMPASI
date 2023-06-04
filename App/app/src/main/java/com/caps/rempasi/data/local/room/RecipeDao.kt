@@ -1,12 +1,9 @@
 package com.caps.rempasi.data.local.room
 
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import com.caps.rempasi.data.local.entity.RecipeEntity
-import kotlinx.coroutines.flow.Flow
 
+@Dao
 interface RecipeDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertRecipes(recipes: List<RecipeEntity>)
@@ -15,7 +12,7 @@ interface RecipeDao {
     suspend fun isSavedRecipe(name: String): Boolean
 
     @Query("SELECT * FROM recipe where recipe_name LIKE '%'|| :keyword || '%' AND isSaved = 1")
-    fun searchSavedRecipes(keyword: String): Flow<List<RecipeEntity>>
+    fun searchSavedRecipes(keyword: String): List<RecipeEntity>
 
     @Update
     suspend fun updateRecipe(recipe: RecipeEntity)

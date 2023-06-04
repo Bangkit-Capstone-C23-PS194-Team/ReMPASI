@@ -80,7 +80,7 @@ fun BottomBar(
 @Preview(showBackground = true)
 @Composable
 fun BottomBarPreview() {
-    ReMPASITheme() {
+    ReMPASITheme {
         BottomBar(navController = rememberNavController())
     }
 }
