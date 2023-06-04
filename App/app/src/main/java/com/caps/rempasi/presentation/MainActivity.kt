@@ -6,7 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.compose.rememberNavController
-import com.caps.rempasi.presentation.ui.navigation.NavigationGraph
+import com.caps.rempasi.presentation.ui.RempasiApp
 import com.caps.rempasi.presentation.ui.screen.auth.GoogleAuthUiClient
 import com.caps.rempasi.presentation.ui.theme.ReMPASITheme
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             ReMPASITheme {
                 val navController = rememberNavController()
-                NavigationGraph(
+                RempasiApp(
                     navController = navController,
                     googleAuthUiClient = googleAuthUiClient,
                     appContext = appContext,

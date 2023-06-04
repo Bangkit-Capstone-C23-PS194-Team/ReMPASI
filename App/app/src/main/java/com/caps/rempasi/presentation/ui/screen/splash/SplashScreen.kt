@@ -66,7 +66,7 @@ fun SplashScreen(
 @Preview(showBackground = true)
 @Composable
 fun SplashPrev() {
-    ReMPASITheme() {
+    ReMPASITheme {
         SplashScreen(firstScreenCallback = {})
     }
 }

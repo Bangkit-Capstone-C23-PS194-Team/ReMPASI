@@ -2,8 +2,10 @@ package com.caps.rempasi.di
 
 import com.caps.rempasi.data.repository.CameraRepositoryImpl
 import com.caps.rempasi.data.repository.DataStoreRepositoryImpl
+import com.caps.rempasi.data.repository.RecipeRepositoryImpl
 import com.caps.rempasi.domain.repository.CameraRepository
 import com.caps.rempasi.domain.repository.DataStoreRepository
+import com.caps.rempasi.domain.repository.RecipeRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -21,4 +23,8 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun provideCameraRepository(cameraRepositoryImpl: CameraRepositoryImpl): CameraRepository
+
+    @Binds
+    @Singleton
+    abstract fun provideRecipeRepository(recipeRepositoryImpl: RecipeRepositoryImpl): RecipeRepository
 }

@@ -1,25 +1,24 @@
 package com.caps.rempasi.presentation.ui.navigation
 
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.caps.rempasi.R
 import com.caps.rempasi.presentation.ui.theme.*
 
 @Composable
-private fun BottomBar(
+fun BottomBar(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -31,39 +30,42 @@ private fun BottomBar(
         val navigationItems = listOf(
             NavigationItem(
                 title = "Tersimpan",
-                icon = Icons.Default.Favorite,
-                screen = Screen.Profile
+                icon = painterResource(id = R.drawable.bookmark),
+                screen = listOf(Screen.Saved)
             ),
             NavigationItem(
-                title = "Beranda",
-                icon = Icons.Default.Home,
-                screen = Screen.Home
+                title = "Kamera",
+                icon = painterResource(id = R.drawable.camera_home),
+                screen = listOf(Screen.Home, Screen.CameraResult, Screen.RecommendationResult)
             ),
             NavigationItem(
                 title = "Profil",
-                icon = Icons.Default.AccountCircle,
-                screen = Screen.Profile
+                icon = painterResource(id = R.drawable.account_circle),
+                screen = listOf(Screen.Profile)
             ),
         )
         BottomNavigation(
-            backgroundColor = Red,
+            backgroundColor = RedSecondary,
         ) {
             navigationItems.map { item ->
                 BottomNavigationItem(
                     icon = {
                         Icon(
-                            imageVector = item.icon,
-                            contentDescription = item.title
+                            painter = item.icon,
+                            contentDescription = item.title,
+                            modifier = Modifier.size(24.dp)
                         )
                     },
                     label = { Text(item.title) },
-                    selectedContentColor = RedSecondary,
-                    unselectedContentColor = White,
-                    selected = currentRoute == item.screen.route,
+                    selectedContentColor = Red,
+                    unselectedContentColor = RedAccent,
+                    selected = currentRoute in item.screen.map { it.route },
                     onClick = {
-                        navController.navigate(item.screen.route) {
-                            popUpTo(navController.graph.findStartDestination().id) {
-                                saveState = true
+                        navController.navigate(item.screen.first().route) {
+                            popUpTo(Screen.Home.route) {
+                                if (currentRoute != Screen.CameraResult.route || currentRoute != Screen.RecommendationResult.route) {
+                                    saveState = true
+                                }
                             }
                             restoreState = true
                             launchSingleTop = true
@@ -78,7 +80,7 @@ private fun BottomBar(
 @Preview(showBackground = true)
 @Composable
 fun BottomBarPreview() {
-    ReMPASITheme() {
+    ReMPASITheme {
         BottomBar(navController = rememberNavController())
     }
 }

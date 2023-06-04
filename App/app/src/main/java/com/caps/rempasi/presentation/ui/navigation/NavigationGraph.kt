@@ -8,7 +8,9 @@ import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -31,6 +33,7 @@ import com.caps.rempasi.presentation.ui.screen.camera.CameraResultScreen
 import com.caps.rempasi.presentation.ui.screen.home.HomeScreen
 import com.caps.rempasi.presentation.ui.screen.onboarding.OnBoardingScreen
 import com.caps.rempasi.presentation.ui.screen.profile.ProfileScreen
+import com.caps.rempasi.presentation.ui.screen.saved.SavedScreen
 import com.caps.rempasi.presentation.ui.screen.splash.SplashScreen
 import com.google.accompanist.pager.ExperimentalPagerApi
 import kotlinx.coroutines.launch
@@ -43,7 +46,8 @@ fun NavigationGraph(
     startDestination: String = Screen.Splash.route,
     googleAuthUiClient: GoogleAuthUiClient,
     appContext: Context,
-    lifeCycleScope: LifecycleCoroutineScope
+    lifeCycleScope: LifecycleCoroutineScope,
+    innerPadding: PaddingValues
 ) {
 
     val sharedViewModel: SharedCameraResultViewModel = viewModel()
@@ -52,29 +56,27 @@ fun NavigationGraph(
         navController = navController,
         startDestination = startDestination
     ) {
-        composable(route = Screen.Splash.route) {
+        composable(Screen.Splash.route) {
             SplashScreen {
                 navController.popBackStack()
                 navController.navigate(it)
             }
         }
-        composable(route = Screen.Onboarding.route) {
+        composable(Screen.Onboarding.route) {
             OnBoardingScreen {
                 navController.popBackStack()
                 navController.navigate(Screen.Auth.route)
             }
         }
-        composable(route = Screen.Home.route) {
+        composable(Screen.Home.route) {
             HomeScreen(
+                modifier = Modifier.padding(innerPadding),
                 sharedViewModel = sharedViewModel,
-                navigateToProfile = {
-                    navController.navigate(Screen.Profile.route)
-                }
             ) {
                 navController.navigate(Screen.CameraResult.route)
             }
         }
-        composable(route = Screen.Auth.route) {
+        composable(Screen.Auth.route) {
             val viewModel = viewModel<AuthViewModel>()
             val state by viewModel.state.collectAsStateWithLifecycle()
 
@@ -141,7 +143,7 @@ fun NavigationGraph(
                 }
             }
         }
-        composable(route = Screen.Welcome.route) {
+        composable(Screen.Welcome.route) {
             googleAuthUiClient.getSignedInUser()?.username?.let { username ->
                 WelcomeScreen(name = username) {
                     navController.popBackStack()
@@ -149,14 +151,10 @@ fun NavigationGraph(
                 }
             }
         }
-        composable(
-            route = Screen.CameraResult.route,
-        ) {
+        composable(Screen.CameraResult.route) {
             CameraResultScreen(
+                modifier = Modifier.padding(innerPadding),
                 sharedViewModel = sharedViewModel,
-                navigateToProfile = {
-                    navController.navigate(Screen.Profile.route)
-                }
             ) {
                 navController.popBackStack()
             }
@@ -165,10 +163,10 @@ fun NavigationGraph(
             val userData = googleAuthUiClient.getSignedInUser()
             userData?.let {
                 ProfileScreen(
+                    modifier = Modifier.padding(innerPadding),
                     accountName = it.username ?: "",
                     email = it.email ?: "",
                     profile = it.profilePictureUrl ?: "",
-                    navigateBack = { navController.popBackStack() },
                     logOut = {
                         lifeCycleScope.launch {
                             googleAuthUiClient.signOut()
@@ -187,6 +185,14 @@ fun NavigationGraph(
                     }
                 )
             }
+        }
+        composable(Screen.Saved.route) {
+            SavedScreen(
+                modifier = Modifier.padding(innerPadding),
+                onItemClicked = {
+//                    navController.navigate(Screen.DetailRecipe.createRoute(it))
+                }
+            )
         }
     }
 }
