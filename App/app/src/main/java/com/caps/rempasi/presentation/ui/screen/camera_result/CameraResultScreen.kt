@@ -1,15 +1,17 @@
-package com.caps.rempasi.presentation.ui.screen.camera
+package com.caps.rempasi.presentation.ui.screen.camera_result
 
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberAsyncImagePainter
@@ -19,15 +21,16 @@ import com.caps.rempasi.presentation.ui.components.ButtonLeadingIcon
 import com.caps.rempasi.presentation.ui.components.CaptureGuideline
 import com.caps.rempasi.presentation.ui.components.ProgressDialog
 import com.caps.rempasi.presentation.ui.screen.SharedCameraResultViewModel
+import com.caps.rempasi.presentation.ui.screen.recomendation.RecommendationResult
 
 @Composable
 fun CameraResultScreen(
     sharedViewModel: SharedCameraResultViewModel,
     modifier: Modifier = Modifier,
+    viewModel: CameraResultViewModel = hiltViewModel(),
+    navigateToRecommendationResult: () -> Unit,
     navigateBack: () -> Unit,
 ) {
-
-    val viewModel = viewModel<CameraResultViewModel>()
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     val imageResult = sharedViewModel.imageResult
@@ -82,7 +85,12 @@ fun CameraResultScreen(
     }
 
     if (!state.isLoading && state.done != null) {
-        viewModel.resetState()
-        Log.d("success", "navigate")
+        state.done?.let {
+            LaunchedEffect(key1 = state.done?.annotatedImage) {
+                viewModel.resetState()
+                sharedViewModel.postRecommendationResult(it)
+                navigateToRecommendationResult()
+            }
+        }
     }
 }

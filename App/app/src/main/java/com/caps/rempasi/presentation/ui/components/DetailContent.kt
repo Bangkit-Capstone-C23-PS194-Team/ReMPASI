@@ -1,12 +1,14 @@
 package com.caps.rempasi.presentation.ui.components
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Icon
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -18,25 +20,32 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
+import com.caps.rempasi.presentation.ui.theme.Red
 import com.caps.rempasi.presentation.ui.theme.Typography
+import com.caps.rempasi.R
+import com.caps.rempasi.presentation.ui.theme.White
 
 @Composable
 fun DetailContent(
+    id: Int,
     name: String,
-    thumbnail: Int,
+    thumbnail: String,
     ingredients: List<String>,
     steps: List<String>,
+    isSaved: Boolean,
+    saveToggle: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp),
         modifier = modifier
             .verticalScroll(rememberScrollState())
             .padding(16.dp),
     ) {
-        Image(
-            painter = painterResource(id = thumbnail),
+        AsyncImage(
+            model = thumbnail,
             contentDescription = "thumbnail $name",
             contentScale = ContentScale.Crop,
             modifier = Modifier
@@ -44,13 +53,34 @@ fun DetailContent(
                 .height(243.dp)
                 .shadow(
                     elevation = 6.dp,
-                    shape = RectangleShape
-                )
-                .clip(
                     shape = RoundedCornerShape(5.dp)
                 )
+                .clip(RoundedCornerShape(5.dp))
+                .background(White)
         )
         Text(text = name, style = Typography.headlineLarge)
+        Button(
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Red,
+                contentColor = Color.White
+            ),
+            modifier = Modifier.fillMaxWidth(),
+            onClick = saveToggle,
+        ) {
+            Icon(
+                modifier = Modifier
+                    .padding(end = 8.dp),
+                painter = if (isSaved) painterResource(id = R.drawable.bookmark) else painterResource(id = R.drawable.bookmark_outlined),
+                contentDescription = "Selanjutnya",
+                tint = Color.White
+            )
+            Text(
+                text = if (isSaved) "Tersimpan" else "Simpan Resep",
+                style = Typography.headlineMedium.copy(
+                    fontSize = 14.sp,
+                )
+            )
+        }
         DetailSection(title = "Bahan-bahan") {
             ingredients.forEach { item ->
                 Row(

@@ -1,5 +1,6 @@
 package com.caps.rempasi.presentation.ui.components
 
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
@@ -37,7 +38,10 @@ fun ItemRecipe(
     var currentSaved by remember { mutableStateOf(isSaved) }
 
     Surface(
-        onClick = { onItemClicked(id) },
+        onClick = {
+            Log.d("Idasd", "ItemRecipe: $id")
+            onItemClicked(id)
+        },
         color = White,
         modifier = modifier
             .fillMaxWidth()
@@ -59,9 +63,12 @@ fun ItemRecipe(
                         .clip(RoundedCornerShape(5.dp))
                 )
                 Icon(
-                    painter = if (currentSaved) painterResource(id = R.drawable.bookmark) else painterResource(id = R.drawable.bookmark_outlined),
+                    painter = if (currentSaved) painterResource(id = R.drawable.bookmark) else painterResource(
+                        id = R.drawable.bookmark_outlined
+                    ),
                     contentDescription = null,
-                    tint = Red
+                    tint = Red,
+                    modifier = Modifier.size(24.dp)
                 )
             }
             Spacer(modifier = Modifier.width(16.dp))
