@@ -4,5 +4,5 @@ import com.caps.rempasi.data.local.entity.RecipeEntity
 import kotlinx.coroutines.flow.Flow
 
 interface GetRecommendationRecipe {
-    fun getRecipes(): Flow<List<RecipeEntity>>
+    fun getRecipes(keyword: List<String>): Flow<List<RecipeEntity>>
 }

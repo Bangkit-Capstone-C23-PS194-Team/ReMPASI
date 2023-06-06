@@ -8,5 +8,5 @@ import javax.inject.Inject
 class GetRecommendationRecipeInteractor @Inject constructor(
     private val recipeRepository: RecipeRepository
 ) : GetRecommendationRecipe {
-    override fun getRecipes(): Flow<List<RecipeEntity>> = recipeRepository.getRecipes()
+    override fun getRecipes(keyword: List<String>): Flow<List<RecipeEntity>> = recipeRepository.getRecipes(keyword)
 }

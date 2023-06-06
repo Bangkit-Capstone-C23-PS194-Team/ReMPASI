@@ -10,13 +10,12 @@ import androidx.compose.material.Icon
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -29,7 +28,6 @@ import com.caps.rempasi.presentation.ui.theme.White
 
 @Composable
 fun DetailContent(
-    id: Int,
     name: String,
     thumbnail: String,
     ingredients: List<String>,
@@ -38,6 +36,8 @@ fun DetailContent(
     saveToggle: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    var currentSaved by remember { mutableStateOf(isSaved) }
+
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp),
         modifier = modifier
@@ -56,7 +56,7 @@ fun DetailContent(
                     shape = RoundedCornerShape(5.dp)
                 )
                 .clip(RoundedCornerShape(5.dp))
-                .background(White)
+                .background(White),
         )
         Text(text = name, style = Typography.headlineLarge)
         Button(
@@ -65,17 +65,22 @@ fun DetailContent(
                 contentColor = Color.White
             ),
             modifier = Modifier.fillMaxWidth(),
-            onClick = saveToggle,
+            onClick = {
+                saveToggle()
+                currentSaved = !currentSaved
+            },
         ) {
             Icon(
                 modifier = Modifier
                     .padding(end = 8.dp),
-                painter = if (isSaved) painterResource(id = R.drawable.bookmark) else painterResource(id = R.drawable.bookmark_outlined),
+                painter = if (currentSaved) painterResource(id = R.drawable.bookmark) else painterResource(
+                    id = R.drawable.bookmark_outlined
+                ),
                 contentDescription = "Selanjutnya",
                 tint = Color.White
             )
             Text(
-                text = if (isSaved) "Tersimpan" else "Simpan Resep",
+                text = if (currentSaved) "Tersimpan" else "Simpan Resep",
                 style = Typography.headlineMedium.copy(
                     fontSize = 14.sp,
                 )

@@ -22,13 +22,12 @@ fun DetailRecipeScreen(
             is UIState.Success -> {
                 val recipe = uiState.data
                 DetailContent(
-                    id = recipe.id,
                     name = recipe.recipe_name,
                     thumbnail = recipe.imageUrl,
                     ingredients = recipe.ingredients,
                     steps = recipe.steps,
                     isSaved = recipe.isSaved,
-                    saveToggle = {},
+                    saveToggle = { viewModel.updateSavedRecipe(recipe, !recipe.isSaved) },
                     modifier = modifier
                 )
             }

@@ -34,6 +34,7 @@ fun AnnotatedImageDetectionSection(
         modifier = modifier
             .padding(horizontal = 16.dp)
             .height(200.dp)
+            .fillMaxWidth()
             .shadow(
                 elevation = 6.dp,
                 shape = RoundedCornerShape(5.dp)

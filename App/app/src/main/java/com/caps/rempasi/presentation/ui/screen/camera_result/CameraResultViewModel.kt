@@ -15,7 +15,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CameraResultViewModel @Inject constructor(
-    private val getRecommendationRecipe: GetRecommendationRecipe,
     private val postImageDetection: PostImageDetection,
 ) : ViewModel() {
     private val _state = MutableStateFlow(ProgressState())
@@ -45,23 +44,17 @@ class CameraResultViewModel @Inject constructor(
     }
 
     fun postDataTest() {
-        var imageUrl = ""
         setProgress(0.18f)
         viewModelScope.launch {
-            delay(2000)
-            setProgress(0.3f)
+            setProgress(0.34f)
+            delay(700)
+            setProgress(0.51f)
+            delay(8000)
             postImageDetection.imageDetection()
                 .collect {
-                    imageUrl = it
-                }
-            delay(2400)
-            setProgress(0.93f)
-            getRecommendationRecipe.getRecipes()
-                .collect {
-                    done(RecommendationResult(
-                        imageUrl,
-                        it
-                    ))
+                    setProgress(0.98f)
+                    delay(800)
+                    done(it)
                 }
         }
     }

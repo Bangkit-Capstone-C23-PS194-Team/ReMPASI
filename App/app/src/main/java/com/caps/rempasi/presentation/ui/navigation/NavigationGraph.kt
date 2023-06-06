@@ -197,7 +197,10 @@ fun NavigationGraph(
                 onItemClick = {
                     navController.navigate(Screen.DetailRecipe.createRoute(it))
                 },
-                sharedViewModel = sharedViewModel
+                sharedViewModel = sharedViewModel,
+                onCameraClick = {
+                    navController.popBackStack(Screen.Home.route, false)
+                }
             )
         }
         composable(Screen.Saved.route) {

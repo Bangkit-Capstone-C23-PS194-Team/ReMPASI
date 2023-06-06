@@ -29,4 +29,8 @@ abstract class AppModule {
     @Binds
     @Singleton
     abstract fun provideGetDetailRecipe(detailRecipeInteractor: DetailRecipeInteractor): DetailRecipe
+
+    @Binds
+    @Singleton
+    abstract fun provideUpdateSavedRecipe(updateSavedRecipeInteractor: UpdateSavedRecipeInteractor): UpdateSavedRecipe
 }

@@ -10,7 +10,7 @@ object DummyRecipeData {
                 RecipeItem(
                     id = 0,
                     recipeName = "Nasi Goreng",
-                    imageUrl = "",
+                    imageUrl = "https://res.cloudinary.com/dk0z4ums3/image/upload/v1638252657/attached_image/cara-menghangatkan-mpasi-agar-kualitasnya-tetap-terjaga-0-alodokter.jpg",
                     ingredients = listOf(
                         "Nasi",
                         "Bawang merah",
@@ -35,7 +35,7 @@ object DummyRecipeData {
                 RecipeItem(
                     id = 1,
                     recipeName = "Ayam Bakar",
-                    imageUrl = "",
+                    imageUrl = "https://res.cloudinary.com/dk0z4ums3/image/upload/v1638252657/attached_image/cara-menghangatkan-mpasi-agar-kualitasnya-tetap-terjaga-0-alodokter.jpg",
                     ingredients = listOf(
                         "Ayam",
                         "Bawang merah",
@@ -84,7 +84,7 @@ object DummyRecipeData {
                 RecipeItem(
                     id = 3,
                     recipeName = "Mie Goreng",
-                    imageUrl = "",
+                    imageUrl = "https://img.my-best.id/product_images/bdb83fa3fa2f114623dca445fa9918ff.jpg?ixlib=rails-4.3.1&q=70&lossless=0&w=800&h=800&fit=clip&s=74ff4022aecfd88dfb31284714d133de",
                     ingredients = listOf(
                         "Mie telur",
                         "Bawang merah",
@@ -110,7 +110,7 @@ object DummyRecipeData {
                 RecipeItem(
                     id = 4,
                     recipeName = "Soto Ayam",
-                    imageUrl = "",
+                    imageUrl = "https://i.pinimg.com/originals/5b/c5/7b/5bc57bf59d86b78868219fdcabd53411.jpg",
                     ingredients = listOf(
                         "Daging ayam",
                         "Bawang merah",
@@ -278,7 +278,7 @@ object DummyRecipeData {
                 RecipeItem(
                     id = 10,
                     recipeName = "Pisang Goreng",
-                    imageUrl = "",
+                    imageUrl = "https://assets.ayobandung.com/crop/0x0:0x0/750x500/webp/photo/2023/02/17/525195314.jpg",
                     ingredients = listOf(
                         "Pisang",
                         "Tepung terigu",

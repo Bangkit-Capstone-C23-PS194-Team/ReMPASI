@@ -63,9 +63,7 @@ fun BottomBar(
                     onClick = {
                         navController.navigate(item.screen.first().route) {
                             popUpTo(Screen.Home.route) {
-                                if (currentRoute != Screen.CameraResult.route || currentRoute != Screen.RecommendationResult.route) {
-                                    saveState = true
-                                }
+                                saveState = true
                             }
                             restoreState = true
                             launchSingleTop = true
