@@ -5,7 +5,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.caps.rempasi.data.local.entity.RecipeEntity
-import com.caps.rempasi.domain.usecase.GetListSavedRecipeUseCase
+import com.caps.rempasi.domain.usecase.recipe.GetListSavedRecipe
+import com.caps.rempasi.domain.usecase.recipe.UpdateSavedRecipe
 import com.caps.rempasi.presentation.ui.common.UIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,17 +17,21 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SavedViewModel @Inject constructor(
-    private val getListSavedRecipeUseCase: GetListSavedRecipeUseCase
+    private val getListSavedRecipe: GetListSavedRecipe,
 ): ViewModel() {
     private val _uiState: MutableStateFlow<UIState<List<RecipeEntity>>> = MutableStateFlow(UIState.Loading)
     val uiState get() = _uiState.asStateFlow()
 
+    fun resetUIState() {
+        _uiState.value = UIState.Loading
+    }
+
     private val _query = mutableStateOf("")
     val query: State<String> get() = _query
 
-    fun searchUsers(query: String) = viewModelScope.launch {
+    fun searchRecipe(query: String) = viewModelScope.launch {
         _query.value = query
-        getListSavedRecipeUseCase.searchSavedRecipes(_query.value)
+        getListSavedRecipe.searchSavedRecipes(_query.value)
             .catch {
                 _uiState.value = UIState.Error(it.message.toString())
             }

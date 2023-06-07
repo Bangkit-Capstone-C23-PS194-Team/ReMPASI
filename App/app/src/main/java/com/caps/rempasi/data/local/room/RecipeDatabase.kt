@@ -8,7 +8,7 @@ import com.caps.rempasi.utils.StringListTypeConverter
 
 @Database(
     entities = [RecipeEntity::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 @TypeConverters(StringListTypeConverter::class)
