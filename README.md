@@ -17,6 +17,12 @@ Clone the forked repository into your local machine, on the part of repository o
 Do not to forget this step, to create your own branch, type this command on your local VCS
 
 ```
+git branch <your-branch-name>
+```
+
+well, if you wanna more simply way, let's create and move to your own branch by typing
+
+```
 git checkout -b <your-branch-name>
 ```
 
