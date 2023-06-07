@@ -3,6 +3,7 @@ package com.caps.rempasi.presentation.ui.components
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Surface
@@ -32,6 +33,7 @@ fun ItemRecipe(
     description: List<String>,
     isSaved: Boolean,
     onItemClicked: (Int) -> Unit,
+    saveToggle: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     var currentSaved by remember { mutableStateOf(isSaved) }
@@ -51,18 +53,29 @@ fun ItemRecipe(
             Box {
                 AsyncImage(
                     model = thumbnail,
-                    contentDescription = null,
+                    contentDescription = "thumbnail $title",
                     contentScale = ContentScale.Crop,
-                    modifier = modifier
+                    modifier = Modifier
                         .width(75.dp)
                         .height(75.dp)
                         .clip(RoundedCornerShape(5.dp))
                 )
-                Icon(
-                    painter = if (currentSaved) painterResource(id = R.drawable.bookmark) else painterResource(id = R.drawable.bookmark_outlined),
-                    contentDescription = null,
-                    tint = Red
-                )
+                IconButton(
+                    onClick = {
+                        saveToggle()
+                        currentSaved = !currentSaved
+                    },
+                    modifier = Modifier.size(24.dp)
+                ) {
+                    Icon(
+                        painter = if (currentSaved) painterResource(id = R.drawable.bookmark) else painterResource(
+                            id = R.drawable.bookmark_outlined
+                        ),
+                        contentDescription = null,
+                        tint = Red,
+                        modifier = Modifier.fillMaxSize()
+                    )
+                }
             }
             Spacer(modifier = Modifier.width(16.dp))
             Column(
@@ -108,7 +121,8 @@ fun ItemPreview() {
                 "Sejumput bawang merah goreng",
             ),
             isSaved = false,
-            onItemClicked = {}
+            onItemClicked = {},
+            saveToggle = {}
         )
     }
 }

@@ -32,7 +32,9 @@ class MainActivity : ComponentActivity() {
         val lifeCycleScope = lifecycleScope
 
         setContent {
-            ReMPASITheme {
+            ReMPASITheme(
+                darkTheme = false
+            ) {
                 val navController = rememberNavController()
                 RempasiApp(
                     navController = navController,

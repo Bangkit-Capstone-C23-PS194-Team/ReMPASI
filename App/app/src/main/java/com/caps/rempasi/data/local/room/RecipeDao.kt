@@ -14,6 +14,9 @@ interface RecipeDao {
     @Query("SELECT * FROM recipe where recipe_name LIKE '%'|| :keyword || '%' AND isSaved = 1")
     fun searchSavedRecipes(keyword: String): List<RecipeEntity>
 
+    @Query("SELECT * FROM recipe where id = :id")
+    fun getRecipeById(id: Int): RecipeEntity
+
     @Update
     suspend fun updateRecipe(recipe: RecipeEntity)
 

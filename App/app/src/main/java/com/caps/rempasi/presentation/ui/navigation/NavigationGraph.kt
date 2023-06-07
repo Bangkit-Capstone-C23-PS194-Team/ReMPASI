@@ -22,17 +22,21 @@ import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.caps.rempasi.presentation.ui.screen.SharedCameraResultViewModel
 import com.caps.rempasi.presentation.ui.screen.auth.AuthScreen
 import com.caps.rempasi.presentation.ui.screen.auth.AuthViewModel
 import com.caps.rempasi.presentation.ui.screen.auth.GoogleAuthUiClient
 import com.caps.rempasi.presentation.ui.screen.auth.WelcomeScreen
-import com.caps.rempasi.presentation.ui.screen.camera.CameraResultScreen
+import com.caps.rempasi.presentation.ui.screen.camera_result.CameraResultScreen
 import com.caps.rempasi.presentation.ui.screen.home.HomeScreen
 import com.caps.rempasi.presentation.ui.screen.onboarding.OnBoardingScreen
 import com.caps.rempasi.presentation.ui.screen.profile.ProfileScreen
+import com.caps.rempasi.presentation.ui.screen.recipe.DetailRecipeScreen
+import com.caps.rempasi.presentation.ui.screen.recomendation.RecommendationScreen
 import com.caps.rempasi.presentation.ui.screen.saved.SavedScreen
 import com.caps.rempasi.presentation.ui.screen.splash.SplashScreen
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -155,6 +159,7 @@ fun NavigationGraph(
             CameraResultScreen(
                 modifier = Modifier.padding(innerPadding),
                 sharedViewModel = sharedViewModel,
+                navigateToRecommendationResult = { navController.navigate(Screen.RecommendationResult.route) }
             ) {
                 navController.popBackStack()
             }
@@ -186,13 +191,34 @@ fun NavigationGraph(
                 )
             }
         }
+        composable(Screen.RecommendationResult.route) {
+            RecommendationScreen(
+                modifier = Modifier.padding(innerPadding),
+                onItemClick = {
+                    navController.navigate(Screen.DetailRecipe.createRoute(it))
+                },
+                sharedViewModel = sharedViewModel,
+                onCameraClick = {
+                    navController.popBackStack(Screen.Home.route, false)
+                }
+            )
+        }
         composable(Screen.Saved.route) {
             SavedScreen(
                 modifier = Modifier.padding(innerPadding),
                 onItemClicked = {
-//                    navController.navigate(Screen.DetailRecipe.createRoute(it))
+                    navController.navigate(Screen.DetailRecipe.createRoute(it))
                 }
             )
+        }
+        composable(
+            route = Screen.DetailRecipe.route,
+            arguments = listOf(
+                navArgument("recipeId") { type = NavType.IntType }
+            ),
+        ) {
+            val recipeId = it.arguments?.getInt("recipeId") ?: 0
+            DetailRecipeScreen(id = recipeId, modifier = Modifier.padding(innerPadding))
         }
     }
 }

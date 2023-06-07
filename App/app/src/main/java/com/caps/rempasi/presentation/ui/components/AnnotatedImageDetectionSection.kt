@@ -1,6 +1,5 @@
 package com.caps.rempasi.presentation.ui.components
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,6 +18,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.caps.rempasi.R
 import com.caps.rempasi.presentation.ui.theme.ReMPASITheme
 import com.caps.rempasi.presentation.ui.theme.Red
@@ -28,12 +28,13 @@ import com.caps.rempasi.presentation.ui.theme.White
 fun AnnotatedImageDetectionSection(
     modifier: Modifier = Modifier,
     onCameraClickListener: () -> Unit,
-    imageUrl: Int,
+    imageUrl: String,
 ) {
     Box(
         modifier = modifier
+            .padding(horizontal = 16.dp)
+            .height(200.dp)
             .fillMaxWidth()
-            .height(243.dp)
             .shadow(
                 elevation = 6.dp,
                 shape = RoundedCornerShape(5.dp)
@@ -42,15 +43,15 @@ fun AnnotatedImageDetectionSection(
             .background(White)
 
     ) {
-        Image(
+        AsyncImage(
+            model = imageUrl,
             modifier = Modifier.align(Alignment.Center),
-            painter = painterResource(id = imageUrl),
             contentDescription = null
         )
         IconButton(
             modifier = Modifier
                 .align(Alignment.BottomEnd)
-                .padding(end = 4.dp, bottom = 4.dp)
+                .padding(end = 6.dp, bottom = 6.dp)
                 .size(30.dp)
                 .shadow(
                     elevation = 3.dp,
@@ -58,7 +59,8 @@ fun AnnotatedImageDetectionSection(
                 )
                 .background(White)
                 .clip(RoundedCornerShape(5.dp)),
-            onClick = { }) {
+            onClick = onCameraClickListener
+        ) {
             Icon(
                 modifier = Modifier
                     .size(24.dp),
@@ -73,10 +75,10 @@ fun AnnotatedImageDetectionSection(
 @Preview(showBackground = true, device = Devices.PIXEL_3A)
 @Composable
 fun PreviewAnnotatedImageDetectionSection() {
-    ReMPASITheme() {
+    ReMPASITheme {
         AnnotatedImageDetectionSection(
             onCameraClickListener = { },
-            imageUrl = R.drawable.bubur_hati_ayam
+            imageUrl = ""
         )
     }
 }
