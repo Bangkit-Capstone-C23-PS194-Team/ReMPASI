@@ -4,21 +4,21 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import com.caps.rempasi.presentation.ui.screen.camera.ImageResult
-import com.caps.rempasi.presentation.ui.screen.recomendation.RecommendationResult
+import com.caps.rempasi.presentation.ui.screen.camera_result.ImageResult
+import com.caps.rempasi.presentation.ui.screen.recomendation.DetectionResult
 
 class SharedCameraResultViewModel : ViewModel() {
     var imageResult by mutableStateOf<ImageResult?>(null)
         private set
 
-    var recommendationResult by mutableStateOf<RecommendationResult?>(null)
+    var detectionResult by mutableStateOf<DetectionResult?>(null)
         private set
 
     fun postImageResult(newImageResult: ImageResult) {
         imageResult = newImageResult
     }
 
-    fun postRecommendationResult(newRecommendationResult: RecommendationResult) {
-        recommendationResult = newRecommendationResult
+    fun postRecommendationResult(newDetectionResult: DetectionResult) {
+        detectionResult = newDetectionResult
     }
 }

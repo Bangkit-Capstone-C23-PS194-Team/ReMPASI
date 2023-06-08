@@ -1,5 +1,6 @@
 package com.caps.rempasi.presentation.ui.components
 
+import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,8 +19,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.net.toUri
 import coil.compose.AsyncImage
 import com.caps.rempasi.R
+import com.caps.rempasi.data.remote.response.Data
+import com.caps.rempasi.data.remote.response.PredictionsItem
 import com.caps.rempasi.presentation.ui.theme.ReMPASITheme
 import com.caps.rempasi.presentation.ui.theme.Red
 import com.caps.rempasi.presentation.ui.theme.White
@@ -28,7 +32,8 @@ import com.caps.rempasi.presentation.ui.theme.White
 fun AnnotatedImageDetectionSection(
     modifier: Modifier = Modifier,
     onCameraClickListener: () -> Unit,
-    imageUrl: String,
+    imageUrl: Uri,
+    data: List<PredictionsItem>,
 ) {
     Box(
         modifier = modifier
@@ -43,10 +48,10 @@ fun AnnotatedImageDetectionSection(
             .background(White)
 
     ) {
-        AsyncImage(
-            model = imageUrl,
+        SquareBorderedImage(
+            imageUri = imageUrl,
+            predictions = data,
             modifier = Modifier.align(Alignment.Center),
-            contentDescription = null
         )
         IconButton(
             modifier = Modifier
@@ -78,7 +83,8 @@ fun PreviewAnnotatedImageDetectionSection() {
     ReMPASITheme {
         AnnotatedImageDetectionSection(
             onCameraClickListener = { },
-            imageUrl = ""
+            imageUrl = "".toUri(),
+            data = listOf()
         )
     }
 }

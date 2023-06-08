@@ -6,11 +6,11 @@ import com.caps.rempasi.data.remote.response.RecommendationResponse
 object DummyRecipeData {
     fun getRecipes() =
         RecommendationResponse(
-            recipes = listOf(
+            data = listOf(
                 RecipeItem(
                     id = 0,
-                    recipeName = "Nasi Goreng",
-                    imageUrl = "https://res.cloudinary.com/dk0z4ums3/image/upload/v1638252657/attached_image/cara-menghangatkan-mpasi-agar-kualitasnya-tetap-terjaga-0-alodokter.jpg",
+                    name = "Nasi Goreng",
+                    image = "https://res.cloudinary.com/dk0z4ums3/image/upload/v1638252657/attached_image/cara-menghangatkan-mpasi-agar-kualitasnya-tetap-terjaga-0-alodokter.jpg",
                     ingredients = listOf(
                         "Nasi",
                         "Bawang merah",
@@ -34,8 +34,8 @@ object DummyRecipeData {
                 ),
                 RecipeItem(
                     id = 1,
-                    recipeName = "Ayam Bakar",
-                    imageUrl = "https://res.cloudinary.com/dk0z4ums3/image/upload/v1638252657/attached_image/cara-menghangatkan-mpasi-agar-kualitasnya-tetap-terjaga-0-alodokter.jpg",
+                    name = "Ayam Bakar",
+                    image = "https://res.cloudinary.com/dk0z4ums3/image/upload/v1638252657/attached_image/cara-menghangatkan-mpasi-agar-kualitasnya-tetap-terjaga-0-alodokter.jpg",
                     ingredients = listOf(
                         "Ayam",
                         "Bawang merah",
@@ -58,8 +58,8 @@ object DummyRecipeData {
                 ),
                 RecipeItem(
                     id = 2,
-                    recipeName = "Sate Ayam",
-                    imageUrl = "",
+                    name = "Sate Ayam",
+                    image = "",
                     ingredients = listOf(
                         "Daging ayam",
                         "Bawang merah",
@@ -83,8 +83,8 @@ object DummyRecipeData {
                 ),
                 RecipeItem(
                     id = 3,
-                    recipeName = "Mie Goreng",
-                    imageUrl = "https://img.my-best.id/product_images/bdb83fa3fa2f114623dca445fa9918ff.jpg?ixlib=rails-4.3.1&q=70&lossless=0&w=800&h=800&fit=clip&s=74ff4022aecfd88dfb31284714d133de",
+                    name = "Mie Goreng",
+                    image = "https://img.my-best.id/product_images/bdb83fa3fa2f114623dca445fa9918ff.jpg?ixlib=rails-4.3.1&q=70&lossless=0&w=800&h=800&fit=clip&s=74ff4022aecfd88dfb31284714d133de",
                     ingredients = listOf(
                         "Mie telur",
                         "Bawang merah",
@@ -109,8 +109,8 @@ object DummyRecipeData {
                 ),
                 RecipeItem(
                     id = 4,
-                    recipeName = "Soto Ayam",
-                    imageUrl = "https://i.pinimg.com/originals/5b/c5/7b/5bc57bf59d86b78868219fdcabd53411.jpg",
+                    name = "Soto Ayam",
+                    image = "https://i.pinimg.com/originals/5b/c5/7b/5bc57bf59d86b78868219fdcabd53411.jpg",
                     ingredients = listOf(
                         "Daging ayam",
                         "Bawang merah",
@@ -140,8 +140,8 @@ object DummyRecipeData {
                 ),
                 RecipeItem(
                     id = 5,
-                    recipeName = "Rendang Daging",
-                    imageUrl = "",
+                    name = "Rendang Daging",
+                    image = "",
                     ingredients = listOf(
                         "Daging sapi",
                         "Bawang merah",
@@ -168,8 +168,8 @@ object DummyRecipeData {
                 ),
                 RecipeItem(
                     id = 6,
-                    recipeName = "Nasi Uduk",
-                    imageUrl = "",
+                    name = "Nasi Uduk",
+                    image = "",
                     ingredients = listOf(
                         "Beras",
                         "Santan",
@@ -192,8 +192,8 @@ object DummyRecipeData {
                 ),
                 RecipeItem(
                     id = 7,
-                    recipeName = "Gado-gado",
-                    imageUrl = "",
+                    name = "Gado-gado",
+                    image = "",
                     ingredients = listOf(
                         "Sayuran (kubis, tauge, kacang panjang, wortel)",
                         "Tempe",
@@ -220,8 +220,8 @@ object DummyRecipeData {
                 ),
                 RecipeItem(
                     id = 8,
-                    recipeName = "Soto Betawi",
-                    imageUrl = "",
+                    name = "Soto Betawi",
+                    image = "",
                     ingredients = listOf(
                         "Daging sapi",
                         "Bawang merah",
@@ -250,8 +250,8 @@ object DummyRecipeData {
                 ),
                 RecipeItem(
                     id = 9,
-                    recipeName = "Pecel Lele",
-                    imageUrl = "",
+                    name = "Pecel Lele",
+                    image = "",
                     ingredients = listOf(
                         "Lele",
                         "Terasi",
@@ -277,8 +277,8 @@ object DummyRecipeData {
                 ),
                 RecipeItem(
                     id = 10,
-                    recipeName = "Pisang Goreng",
-                    imageUrl = "https://assets.ayobandung.com/crop/0x0:0x0/750x500/webp/photo/2023/02/17/525195314.jpg",
+                    name = "Pisang Goreng",
+                    image = "https://assets.ayobandung.com/crop/0x0:0x0/750x500/webp/photo/2023/02/17/525195314.jpg",
                     ingredients = listOf(
                         "Pisang",
                         "Tepung terigu",
@@ -300,8 +300,8 @@ object DummyRecipeData {
                 ),
                 RecipeItem(
                     id = 11,
-                    recipeName = "Ayam Goreng",
-                    imageUrl = "",
+                    name = "Ayam Goreng",
+                    image = "",
                     ingredients = listOf(
                         "10 Potong ayam",
                         "Bawang putih",
@@ -323,8 +323,8 @@ object DummyRecipeData {
                 ),
                 RecipeItem(
                     id = 12,
-                    recipeName = "Mie Ayam",
-                    imageUrl = "",
+                    name = "Mie Ayam",
+                    image = "",
                     ingredients = listOf(
                         "Mie telur",
                         "Daging ayam",
@@ -354,8 +354,8 @@ object DummyRecipeData {
                 ),
                 RecipeItem(
                     id = 13,
-                    recipeName = "Sayur Asem",
-                    imageUrl = "",
+                    name = "Sayur Asem",
+                    image = "",
                     ingredients = listOf(
                         "Labu siam",
                         "Kacang panjang",
@@ -383,8 +383,8 @@ object DummyRecipeData {
                 ),
                 RecipeItem(
                     id = 14,
-                    recipeName = "Pepes Ikan",
-                    imageUrl = "",
+                    name = "Pepes Ikan",
+                    image = "",
                     ingredients = listOf(
                         "Ikan (gurame, nila, atau lele)",
                         "Daun pisang",
@@ -403,8 +403,8 @@ object DummyRecipeData {
                 ),
                 RecipeItem(
                     id = 15,
-                    recipeName = "Sop Buntut",
-                    imageUrl = "",
+                    name = "Sop Buntut",
+                    image = "",
                     ingredients = listOf(
                         "Buntut sapi",
                         "Bawang merah",
@@ -432,8 +432,8 @@ object DummyRecipeData {
                 ),
                 RecipeItem(
                     id = 16,
-                    recipeName = "Pempek Palembang",
-                    imageUrl = "",
+                    name = "Pempek Palembang",
+                    image = "",
                     ingredients = listOf(
                         "Tepung sagu",
                         "Ikan tengiri",
@@ -461,8 +461,8 @@ object DummyRecipeData {
                 ),
                 RecipeItem(
                     id = 17,
-                    recipeName = "Es Teler",
-                    imageUrl = "",
+                    name = "Es Teler",
+                    image = "",
                     ingredients = listOf(
                         "Kelapa muda",
                         "Nangka",
@@ -486,6 +486,8 @@ object DummyRecipeData {
                     )
                 ),
 
-                )
+                ),
+            message = "Data fetch successfuly",
+            status = true
         )
 }

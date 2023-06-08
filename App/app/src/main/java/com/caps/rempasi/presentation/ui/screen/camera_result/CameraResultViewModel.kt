@@ -1,10 +1,11 @@
 package com.caps.rempasi.presentation.ui.screen.camera_result
 
+import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.caps.rempasi.domain.usecase.image_detection.PostImageDetection
-import com.caps.rempasi.domain.usecase.recipe.GetRecommendationRecipe
-import com.caps.rempasi.presentation.ui.screen.recomendation.RecommendationResult
+import com.caps.rempasi.presentation.ui.common.ProgressState
+import com.caps.rempasi.presentation.ui.screen.recomendation.DetectionResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -33,7 +34,7 @@ class CameraResultViewModel @Inject constructor(
         }
     }
 
-    private fun done(result: RecommendationResult) {
+    private fun done(result: DetectionResult) {
         _state.update {
             it.copy(
                 isLoading = false,
@@ -43,7 +44,7 @@ class CameraResultViewModel @Inject constructor(
         }
     }
 
-    fun postDataTest() {
+    fun postDataTest(imageUri: Uri) {
         setProgress(0.18f)
         viewModelScope.launch {
             setProgress(0.34f)
@@ -54,7 +55,12 @@ class CameraResultViewModel @Inject constructor(
                 .collect {
                     setProgress(0.98f)
                     delay(800)
-                    done(it)
+                    done(
+                        DetectionResult(
+                            imageUri,
+                            it
+                        )
+                    )
                 }
         }
     }
