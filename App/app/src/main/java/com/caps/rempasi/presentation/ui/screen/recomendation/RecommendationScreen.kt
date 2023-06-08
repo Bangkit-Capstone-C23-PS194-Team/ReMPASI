@@ -1,5 +1,6 @@
 package com.caps.rempasi.presentation.ui.screen.recomendation
 
+import android.net.Uri
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -11,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.caps.rempasi.data.local.entity.RecipeEntity
+import com.caps.rempasi.data.remote.response.PredictionsItem
 import com.caps.rempasi.presentation.ui.common.UIState
 import com.caps.rempasi.presentation.ui.components.AnnotatedImageDetectionSection
 import com.caps.rempasi.presentation.ui.components.ItemRecipe
@@ -25,8 +27,9 @@ fun RecommendationScreen(
     sharedViewModel: SharedCameraResultViewModel,
     onCameraClick: () -> Unit,
 ) {
-    val imageUrl = sharedViewModel.recommendationResult?.annotatedImage!!
-    val ingredients = sharedViewModel.recommendationResult?.objectName!!
+    val imageUrl = sharedViewModel.detectionResult?.imageUri!!
+    val predictions = sharedViewModel.detectionResult?.predictions!!
+    val ingredients = predictions.map { it.label }
 
     LaunchedEffect(ingredients) {
         viewModel.getRecommendationRecipe(ingredients)
@@ -52,13 +55,14 @@ fun RecommendationScreen(
                 modifier = modifier,
                 imageUrl = imageUrl,
                 recipes = recipes,
+                data = predictions,
                 onItemClick = onItemClick,
                 onCameraClick = onCameraClick
             )
         }
         is UIState.Error -> {
             val errorMessage = (uiState as UIState.Error).message
-            Box(modifier = modifier.fillMaxWidth()) {
+            Box(modifier = modifier.fillMaxSize().padding(16.dp)) {
                 Text(
                     text = errorMessage,
                     modifier = Modifier.align(Alignment.Center)
@@ -70,8 +74,9 @@ fun RecommendationScreen(
 
 @Composable
 fun RecommendationContent(
-    imageUrl: String,
+    imageUrl: Uri,
     recipes: List<RecipeEntity>,
+    data: List<PredictionsItem>,
     viewModel: RecommendationResultViewModel = hiltViewModel(),
     onCameraClick: () -> Unit,
     onItemClick: (Int) -> Unit,
@@ -85,7 +90,11 @@ fun RecommendationContent(
             text = "Berikut hasil deteksi kami",
             style = Typography.headlineLarge
         )
-        AnnotatedImageDetectionSection(onCameraClickListener = onCameraClick, imageUrl = imageUrl)
+        AnnotatedImageDetectionSection(
+            onCameraClickListener = onCameraClick,
+            imageUrl = imageUrl,
+            data = data
+        )
         Text(
             modifier = Modifier
                 .padding(top = 16.dp, bottom = 8.dp)

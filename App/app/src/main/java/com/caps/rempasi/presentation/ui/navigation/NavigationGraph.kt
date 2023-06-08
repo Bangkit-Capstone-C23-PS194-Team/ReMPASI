@@ -159,7 +159,9 @@ fun NavigationGraph(
             CameraResultScreen(
                 modifier = Modifier.padding(innerPadding),
                 sharedViewModel = sharedViewModel,
-                navigateToRecommendationResult = { navController.navigate(Screen.RecommendationResult.route) }
+                navigateToRecommendationResult = { navController.navigate(Screen.RecommendationResult.route) {
+                    popUpTo(Screen.Home.route)
+                } }
             ) {
                 navController.popBackStack()
             }

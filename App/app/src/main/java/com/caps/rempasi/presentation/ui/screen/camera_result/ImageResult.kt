@@ -1,4 +1,4 @@
-package com.caps.rempasi.presentation.ui.screen.camera
+package com.caps.rempasi.presentation.ui.screen.camera_result
 
 import android.net.Uri
 import android.os.Parcelable

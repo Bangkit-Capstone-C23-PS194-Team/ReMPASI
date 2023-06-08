@@ -3,48 +3,49 @@ package com.caps.rempasi.data.repository
 import com.caps.rempasi.data.local.entity.RecipeEntity
 import com.caps.rempasi.data.local.room.RecipeDatabase
 import com.caps.rempasi.data.remote.RemoteDataSource
+import com.caps.rempasi.data.remote.response.PredictionsItem
+import com.caps.rempasi.data.remote.retrofit.ApiService
 import com.caps.rempasi.domain.repository.RecipeRepository
-import com.caps.rempasi.presentation.ui.screen.recomendation.RecommendationResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import okhttp3.MultipartBody
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class RecipeRepositoryImpl @Inject constructor(
-    private val remote: RemoteDataSource,
+    private val apiService: ApiService,
     private val recipeDatabase: RecipeDatabase,
 ) : RecipeRepository {
-    override fun imageDetection(): Flow<RecommendationResult> = flow {
-        val imageUrl = "https://cdn.popmama.com/content-images/post/20210813/gabrielle-henderson-djy0xdwceum-unsplashjpg-3bbf6004a0fb5dd501b52970b2aafc7c_800x420.jpg"
-        val objectDetect = listOf(
-            "Ayam",
-            "Goreng"
-        )
-        emit(RecommendationResult(imageUrl, objectDetect ))
+    override fun imageDetection(image: MultipartBody.Part): Flow<List<PredictionsItem>> = flow {
+        val response = apiService.imageDetection(image)
+        if (response.status) {
+            val predictions = response.data.predictions
+            emit(predictions)
+        }
     }.flowOn(Dispatchers.IO)
 
     override fun getRecipes(keyword: List<String>): Flow<List<RecipeEntity>> = flow {
-        val response = remote.getRecipes().recipes.filter {
-            it.recipeName.contains(keyword.first(), ignoreCase = true).or(it.recipeName.contains(
-                keyword[1], ignoreCase = true))
+        val response = apiService.getRecommendationRecipe(keyword)
+        if (response.status) {
+            val recipes = response.data
+            val recipeList = recipes.map { recipeItem ->
+                val isSaved = recipeDatabase.recipeDao().isSavedRecipe(recipeItem.name)
+                RecipeEntity(
+                    recipeItem.id,
+                    recipeItem.image,
+                    recipeItem.name,
+                    recipeItem.steps,
+                    recipeItem.ingredients,
+                    isSaved
+                )
+            }
+            recipeDatabase.recipeDao().deleteNoSaved()
+            recipeDatabase.recipeDao().insertRecipes(recipeList)
+            emit(recipeList)
         }
-        val recipeList = response.map { recipeItem ->
-            val isSaved = recipeDatabase.recipeDao().isSavedRecipe(recipeItem.recipeName)
-            RecipeEntity(
-                recipeItem.id,
-                recipeItem.imageUrl,
-                recipeItem.recipeName,
-                recipeItem.steps,
-                recipeItem.ingredients,
-                isSaved
-            )
-        }
-        recipeDatabase.recipeDao().deleteNoSaved()
-        recipeDatabase.recipeDao().insertRecipes(recipeList)
-        emit(recipeList)
     }.flowOn(Dispatchers.IO)
 
     override fun getDetailRecipeById(id: Int): Flow<RecipeEntity> = flow {

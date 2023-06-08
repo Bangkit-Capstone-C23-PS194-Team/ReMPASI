@@ -3,14 +3,16 @@ package com.caps.rempasi.presentation.ui.screen.camera_result
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.caps.rempasi.domain.usecase.image_detection.PostImageDetection
-import com.caps.rempasi.domain.usecase.recipe.GetRecommendationRecipe
-import com.caps.rempasi.presentation.ui.screen.recomendation.RecommendationResult
+import com.caps.rempasi.presentation.ui.common.ProgressState
+import com.caps.rempasi.presentation.ui.screen.recomendation.DetectionResult
+import com.caps.rempasi.utils.ImageHelper.reduceFileImage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import javax.inject.Inject
 
 @HiltViewModel
@@ -33,7 +35,7 @@ class CameraResultViewModel @Inject constructor(
         }
     }
 
-    private fun done(result: RecommendationResult) {
+    private fun done(result: DetectionResult) {
         _state.update {
             it.copy(
                 isLoading = false,
@@ -43,19 +45,43 @@ class CameraResultViewModel @Inject constructor(
         }
     }
 
-    fun postDataTest() {
-        setProgress(0.18f)
+    fun postDataTest(imageResult: ImageResult) {
+        val imageUri = imageResult.imageUri
+//        setProgress(0.16f)
+        val imageFile = imageResult.imageFile
+//        setProgress(0.20f)
+        val compressedFile = reduceFileImage(imageFile)
+//        setProgress(0.32f)
+        val requestImageFile = compressedFile.asRequestBody("image/jpeg".toMediaType())
+        val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData(
+            "image",
+            compressedFile.name,
+            requestImageFile
+        )
+//        setProgress(0.68f)
         viewModelScope.launch {
-            setProgress(0.34f)
-            delay(700)
-            setProgress(0.51f)
-            delay(8000)
-            postImageDetection.imageDetection()
+            createProgressFlow(0.97f, 1000) // Update progress every second (adjust intervalMillis as needed)
+                .onEach { progress -> setProgress(progress) }
+                .launchIn(viewModelScope)
+            postImageDetection.imageDetection(imageMultipart)
                 .collect {
-                    setProgress(0.98f)
-                    delay(800)
-                    done(it)
+                    done(
+                        DetectionResult(
+                            imageUri,
+                            it
+                        )
+                    )
                 }
+        }
+    }
+
+    fun createProgressFlow(totalProgress: Float, intervalMillis: Long): Flow<Float> = flow {
+        val numSteps = (totalProgress / 0.1f).toInt()
+        val progressPerStep = totalProgress / numSteps
+
+        for (i in 1..numSteps) {
+            emit(i * progressPerStep)
+            delay(intervalMillis)
         }
     }
 }

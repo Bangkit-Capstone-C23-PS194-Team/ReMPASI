@@ -3,6 +3,7 @@ package com.caps.rempasi.presentation.ui.screen.home
 import android.Manifest
 import android.net.Uri
 import android.os.Build
+import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -28,8 +29,7 @@ import com.caps.rempasi.R
 import com.caps.rempasi.presentation.ui.components.ActionCameraButton
 import com.caps.rempasi.presentation.ui.components.CaptureGuideline
 import com.caps.rempasi.presentation.ui.screen.SharedCameraResultViewModel
-import com.caps.rempasi.presentation.ui.screen.camera.ImageResult
-import com.caps.rempasi.utils.ImageHelper.resizeImage
+import com.caps.rempasi.presentation.ui.screen.camera_result.ImageResult
 import com.caps.rempasi.utils.ImageHelper.toFile
 import com.caps.rempasi.utils.UIHelper.showToastPermission
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
@@ -62,18 +62,18 @@ fun HomeScreen(
 
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
-    val configuration = LocalConfiguration.current
-    val screenWidth = configuration.screenWidthDp.dp
+//    val configuration = LocalConfiguration.current
+//    val screenWidth = configuration.screenWidthDp.dp
     var previewView: PreviewView
 
     val launcherGallery =
         rememberLauncherForActivityResult(contract = ActivityResultContracts.PickVisualMedia()) { uri: Uri? ->
             uri?.let {
-                val resizedFile = resizeImage(context, it)
-                resizedFile?.let { file ->
+                val file = it.toFile(context)
+                file.let { f ->
                     sharedViewModel.postImageResult(
                         ImageResult(
-                            file, it
+                            f, it
                         )
                     )
                     navigateToResult()
@@ -90,8 +90,8 @@ fun HomeScreen(
         if (permissionState.allPermissionsGranted) {
             Box(
                 modifier = Modifier
-                    .height(screenWidth * 4 / 3)
-                    .width(screenWidth)
+                    .fillMaxWidth()
+                    .fillMaxHeight(0.8f)
             ) {
                 AndroidView(
                     factory = {
@@ -100,8 +100,7 @@ fun HomeScreen(
                         previewView
                     },
                     modifier = Modifier
-                        .height(screenWidth * 4 / 3)
-                        .width(screenWidth)
+                        .fillMaxSize()
                 )
                 Column(
                     verticalArrangement = Arrangement.Bottom,
@@ -166,7 +165,10 @@ fun HomeScreen(
                     }
                 }
             }
-            Box(modifier = Modifier.padding(horizontal = 16.dp)) {
+            Box(
+                modifier = Modifier
+                    .padding(horizontal = 16.dp)
+            ) {
                 CaptureGuideline()
             }
         }

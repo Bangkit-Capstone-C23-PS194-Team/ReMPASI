@@ -54,9 +54,9 @@ fun SplashScreen(
                     .background(White)
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.logo_temporary),
+                    painter = painterResource(id = R.drawable.logo_transparent),
                     contentDescription = null,
-                    modifier = Modifier.align(Alignment.Center).width(128.dp)
+                    modifier = Modifier.align(Alignment.Center).size(128.dp)
                 )
             }
         }
