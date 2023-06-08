@@ -62,7 +62,7 @@ fun RecommendationScreen(
         }
         is UIState.Error -> {
             val errorMessage = (uiState as UIState.Error).message
-            Box(modifier = modifier.fillMaxWidth()) {
+            Box(modifier = modifier.fillMaxSize().padding(16.dp)) {
                 Text(
                     text = errorMessage,
                     modifier = Modifier.align(Alignment.Center)

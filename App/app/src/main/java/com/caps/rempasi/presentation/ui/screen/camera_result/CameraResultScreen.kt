@@ -79,7 +79,7 @@ fun CameraResultScreen(
             CaptureGuideline()
             Spacer(modifier = Modifier.height(16.dp))
             ButtonLeadingIcon(textTitle = "Temukan Resep", icon = R.drawable.find_recipe) {
-                viewModel.postDataTest(imageResult?.imageUri!!)
+                viewModel.postDataTest(imageResult!!)
             }
         }
 

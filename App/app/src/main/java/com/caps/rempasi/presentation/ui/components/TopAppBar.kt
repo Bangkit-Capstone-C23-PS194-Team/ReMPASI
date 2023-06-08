@@ -47,13 +47,13 @@ fun JetTopAppBar(
                 }
             } else {
                 Icon(
-                    painter = painterResource(R.drawable.logo_temporary),
+                    painter = painterResource(R.drawable.logo_transparent),
                     contentDescription = stringResource(R.string.logo_content_desc),
                     tint = Red,
                     modifier = Modifier
                         .padding(vertical = 5.dp)
-                        .padding(start = 16.dp)
-                        .size(width = 125.dp, height = 40.dp)
+                        .padding(start = 8.dp)
+                        .size(40.dp)
                 )
             }
         },

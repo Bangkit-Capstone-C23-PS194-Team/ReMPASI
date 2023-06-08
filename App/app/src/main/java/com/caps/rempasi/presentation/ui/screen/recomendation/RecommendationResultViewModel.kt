@@ -1,5 +1,6 @@
 package com.caps.rempasi.presentation.ui.screen.recomendation
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.caps.rempasi.data.local.entity.RecipeEntity
@@ -17,9 +18,10 @@ import javax.inject.Inject
 class RecommendationResultViewModel @Inject constructor(
     private val getRecommendationRecipe: GetRecommendationRecipe,
     private val updateSavedRecipe: UpdateSavedRecipe
-): ViewModel() {
+) : ViewModel() {
 
-    private val _uiState: MutableStateFlow<UIState<List<RecipeEntity>>> = MutableStateFlow(UIState.Loading)
+    private val _uiState: MutableStateFlow<UIState<List<RecipeEntity>>> =
+        MutableStateFlow(UIState.Loading)
     val uiState get() = _uiState.asStateFlow()
 
     fun resetUIState() {
@@ -30,7 +32,11 @@ class RecommendationResultViewModel @Inject constructor(
         _uiState.value = UIState.Loading
         getRecommendationRecipe.getRecipes(query)
             .catch {
-                _uiState.value = UIState.Error(it.message.toString())
+                val message = when(it.message.toString()) {
+                    "HTTP 500 " -> "Mohon maaf, server gagal memproses"
+                    else -> it.message.toString()
+                }
+                _uiState.value = UIState.Error(message)
             }
             .collect { recipes ->
                 _uiState.value = UIState.Success(recipes)
