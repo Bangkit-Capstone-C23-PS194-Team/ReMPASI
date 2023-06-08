@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="D:\Kuliah\Semester 6\Bangkit Academy 2023\capstone\ReMPASI-Backend\.venv"
+VIRTUAL_ENV="D:\Kuliah\Semester 6\Bangkit Academy 2023\capstone\ReMPASI\ReMPASI-Backend\.venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
