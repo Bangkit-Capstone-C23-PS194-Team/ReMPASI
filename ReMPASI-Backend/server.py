@@ -155,20 +155,20 @@ def transform_data(object):
 
 def label(object):
     label_mapping = {
-        0: 'Carrot',
-        1: 'Potato',
-        2: 'Tomato',
-        3: 'Banana',
-        4: 'Cheese',
-        5: 'Orange',
-        6: 'Brocoli',
-        7: 'Egg',
-        8: 'Apple',
-        9: 'Pumpkin',
-        10: 'Shrimp',
-        11: 'Mango',
-        12: 'Pineapple',
-        13: 'Watermelon'
+        0: 'Wortel',
+        1: 'Kentang',
+        2: 'Tomat',
+        3: 'Pisang',
+        4: 'Keju',
+        5: 'Jeruk',
+        6: 'Brokoli',
+        7: 'Telur',
+        8: 'Apel',
+        9: 'Labu',
+        10: 'Udang',
+        11: 'Mangga',
+        12: 'Nanas',
+        13: 'Semangka'
     }
 
     for i in object['predictions']:
