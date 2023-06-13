@@ -43,12 +43,12 @@ def ingre():
 
 @app.route('/recommendation', methods=['GET'])
 def recommendation():
-    ingredients = request.args.getlist('ingredients')
-    placeholders = ','.join(['%s'] * len(ingredients))
+    ingredients = request.args.get('ingredients')
+    # placeholders = ','.join(['%s'] * len(ingredients))
     cur = mysql.connection.cursor()
-    query = "SELECT DISTINCT id_food FROM ingredients WHERE ingredients IN ({})".format(
-        placeholders)
-    cur.execute(query, tuple(ingredients))
+    # query = "SELECT id_food FROM ingredients WHERE ingredients IN ({})".format(placeholders)
+    cur.execute(
+        "SELECT id_food FROM ingredients WHERE ingredients LIKE %s", (f"%{ingredients}%",))
     foods_id = cur.fetchall()
 
     recommendation = []
