@@ -12,6 +12,11 @@ ReMPASI is a cutting-edge app designed to empower parents in providing healthy c
 - MPASI Recipe Recommendation: Provides recommendations for complementary meal recipes based on the detected ingredients.
 - Bookmarked Recipe: Allows users to save MPASI recipes and access them offline for convenient meal planning.
 
+## Figma Design
+
+![prototype figma view](local_assets/prototype_figma.jpg)
+Here is the link for the [design](https://www.figma.com/file/ZVk6ZyqANqxLx2dHZAaJ0Z/ReMPASI?type=design&node-id=0%3A1&t=JMqR1hicTc5uTCdu-1)
+
 ## Library
 
 - [Jetpack Compose (M3)](https://developer.android.com/jetpack/androidx/releases/compose-material3)
