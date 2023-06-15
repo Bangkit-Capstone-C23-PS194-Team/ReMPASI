@@ -9,8 +9,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.caps.rempasi.R
 import com.caps.rempasi.data.local.entity.RecipeEntity
 import com.caps.rempasi.data.remote.response.PredictionsItem
 import com.caps.rempasi.presentation.ui.common.UIState
@@ -87,7 +89,7 @@ fun RecommendationContent(
     ) {
         Text(
             modifier = Modifier.padding(vertical = 8.dp, horizontal = 16.dp),
-            text = "Berikut hasil deteksi kami",
+            text = stringResource(R.string.title_detection_result),
             style = Typography.headlineLarge
         )
         AnnotatedImageDetectionSection(
@@ -99,7 +101,7 @@ fun RecommendationContent(
             modifier = Modifier
                 .padding(top = 16.dp, bottom = 8.dp)
                 .padding(horizontal = 16.dp),
-            text = "Rekomendasi resep MPASI",
+            text = stringResource(R.string.title_recommendation),
             style = Typography.headlineLarge
         )
         LazyColumn(
@@ -121,7 +123,7 @@ fun RecommendationContent(
                 item {
                     Box(modifier = Modifier.fillMaxWidth()) {
                         Text(
-                            text = "Mohon maaf, kami belum memiliki resep dengan bahan tersebut",
+                            text = stringResource(R.string.error_dont_have_any_data_matched),
                             modifier = Modifier
                                 .align(Alignment.Center)
                         )

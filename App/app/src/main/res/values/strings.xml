@@ -35,4 +35,10 @@
     <string name="btn_logout">Keluar</string>
     <string name="title_detail_page">Detail Resep</string>
     <string name="permission_message">Anda perlu mengaktifkan izin dalam pengaturan aplikasi</string>
+    <string name="title_detection_result">Berikut hasil deteksi kami</string>
+    <string name="title_recommendation">Rekomendasi resep MPASI</string>
+    <string name="error_dont_have_any_data_matched">Mohon maaf, kami belum memiliki resep dengan bahan tersebut</string>
+    <string name="recipes_not_found_message">Resep tidak ditemukan</string>
+    <string name="cd_no_data_saved_recipes">Tidak ada data resep tersimpan</string>
+    <string name="description_no_data_saved_recipes">Anda belum memiliki resep tersimpan</string>
 </resources>

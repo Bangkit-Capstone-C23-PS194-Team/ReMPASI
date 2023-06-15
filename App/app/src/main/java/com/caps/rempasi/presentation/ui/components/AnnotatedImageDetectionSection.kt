@@ -21,9 +21,7 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
-import coil.compose.AsyncImage
 import com.caps.rempasi.R
-import com.caps.rempasi.data.remote.response.Data
 import com.caps.rempasi.data.remote.response.PredictionsItem
 import com.caps.rempasi.presentation.ui.theme.ReMPASITheme
 import com.caps.rempasi.presentation.ui.theme.Red

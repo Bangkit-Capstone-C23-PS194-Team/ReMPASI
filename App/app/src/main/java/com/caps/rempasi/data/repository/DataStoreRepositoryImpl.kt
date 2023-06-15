@@ -1,7 +1,7 @@
 package com.caps.rempasi.data.repository
 
+import com.caps.rempasi.data.local.datastore.AppPreferences
 import com.caps.rempasi.domain.repository.DataStoreRepository
-import com.rijaldev.snapgram.data.source.local.datastore.AppPreferences
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton

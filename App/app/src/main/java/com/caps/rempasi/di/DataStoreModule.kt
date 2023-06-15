@@ -4,9 +4,9 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
+import com.caps.rempasi.data.local.datastore.AppPreferences
 import com.caps.rempasi.data.local.datastore.AppPreferencesImpl
 import com.caps.rempasi.utils.Constants.APP_PREFERENCES
-import com.rijaldev.snapgram.data.source.local.datastore.AppPreferences
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
