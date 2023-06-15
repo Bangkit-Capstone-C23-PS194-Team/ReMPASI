@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "582862803314-81eche5h77i1esovjct9kctg7ane1n19.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.caps.rempasi",
+            "certificate_hash": "ba4cb8601f91d93292b35b253b818181c06e77cb"
+          }
+        },
+        {
           "client_id": "582862803314-4jjnvhn9akfd1vqi0bltqsu7posvt3tu.apps.googleusercontent.com",
           "client_type": 3
         }
