@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.caps.rempasi.R
@@ -56,7 +57,7 @@ fun AuthScreen(
             contentScale = ContentScale.Fit,
         )
         Text(
-            text = "Untuk melanjutkan, silakan login atau registrasi menggunakan akun Google Anda.",
+            text = stringResource(R.string.title_login),
             style = Typography.titleLarge.copy(
                 textAlign = TextAlign.Center
             ),
@@ -86,11 +87,11 @@ fun AuthScreen(
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.icon_google),
-                    contentDescription = "Logo Google",
+                    contentDescription = stringResource(R.string.cd_logo_google),
                     modifier = Modifier.size(40.dp)
                 )
                 Text(
-                    text = "Masuk dengan Google",
+                    text = stringResource(R.string.btn_login_google),
                     modifier = Modifier.padding(start = 24.dp),
                     style = Typography.bodyMedium
                 )

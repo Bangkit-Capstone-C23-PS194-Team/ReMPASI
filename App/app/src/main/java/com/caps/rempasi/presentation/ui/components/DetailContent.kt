@@ -18,6 +18,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
@@ -46,7 +47,7 @@ fun DetailContent(
     ) {
         AsyncImage(
             model = thumbnail,
-            contentDescription = "thumbnail $name",
+            contentDescription = stringResource(R.string.thumbnail, name),
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .fillMaxWidth()
@@ -76,17 +77,17 @@ fun DetailContent(
                 painter = if (currentSaved) painterResource(id = R.drawable.bookmark) else painterResource(
                     id = R.drawable.bookmark_outlined
                 ),
-                contentDescription = "Selanjutnya",
+                contentDescription = stringResource(R.string.cd_next),
                 tint = Color.White
             )
             Text(
-                text = if (currentSaved) "Tersimpan" else "Simpan Resep",
+                text = if (currentSaved) stringResource(R.string.btn_saved) else stringResource(R.string.btn_save_recipe),
                 style = Typography.headlineMedium.copy(
                     fontSize = 14.sp,
                 )
             )
         }
-        DetailSection(title = "Bahan-bahan") {
+        DetailSection(title = stringResource(R.string.title_ingredients)) {
             ingredients.forEach { item ->
                 Row(
                     modifier = Modifier.padding(bottom = 4.dp),
@@ -105,7 +106,7 @@ fun DetailContent(
                 }
             }
         }
-        DetailSection(title = "Cara Membuat") {
+        DetailSection(title = stringResource(R.string.title_steps)) {
             for ((index, item) in steps.withIndex()) {
                 val itemNumber = index + 1
                 ItemStep(number = itemNumber, step = item)

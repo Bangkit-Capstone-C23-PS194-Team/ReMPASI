@@ -22,6 +22,7 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -117,7 +118,7 @@ fun HomeScreen(
                     ) {
                         ActionCameraButton(
                             icon = R.drawable.galery,
-                            contentDescription = "Buka Galeri"
+                            contentDescription = stringResource(R.string.cd_open_gallery)
                         ) {
                             val mediaType = ActivityResultContracts.PickVisualMedia.ImageOnly
                             launcherGallery.launch(PickVisualMediaRequest(mediaType))
@@ -147,13 +148,13 @@ fun HomeScreen(
                                 painter = painterResource(id = R.drawable.capture),
                                 modifier = Modifier
                                     .size(60.dp),
-                                contentDescription = "Menangkap Gambar",
+                                contentDescription = stringResource(R.string.cd_capture_image),
                                 tint = Color.White
                             )
                         }
                         ActionCameraButton(
                             icon = if (currentFlashMode == FLASH_MODE_ON) R.drawable.flash_on else R.drawable.flash_off,
-                            contentDescription = "Ubah cahaya latar kamera"
+                            contentDescription = stringResource(R.string.cd_flash_mode)
                         ) {
                             currentFlashMode = if (currentFlashMode == FLASH_MODE_ON) {
                                 FLASH_MODE_OFF
