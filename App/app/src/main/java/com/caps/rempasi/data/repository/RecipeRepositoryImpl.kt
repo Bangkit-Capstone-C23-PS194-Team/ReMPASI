@@ -2,7 +2,6 @@ package com.caps.rempasi.data.repository
 
 import com.caps.rempasi.data.local.entity.RecipeEntity
 import com.caps.rempasi.data.local.room.RecipeDatabase
-import com.caps.rempasi.data.remote.RemoteDataSource
 import com.caps.rempasi.data.remote.response.PredictionsItem
 import com.caps.rempasi.data.remote.retrofit.ApiService
 import com.caps.rempasi.domain.repository.RecipeRepository
