@@ -47,18 +47,14 @@ class CameraResultViewModel @Inject constructor(
 
     fun postDataTest(imageResult: ImageResult) {
         val imageUri = imageResult.imageUri
-//        setProgress(0.16f)
         val imageFile = imageResult.imageFile
-//        setProgress(0.20f)
         val compressedFile = reduceFileImage(imageFile)
-//        setProgress(0.32f)
         val requestImageFile = compressedFile.asRequestBody("image/jpeg".toMediaType())
         val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData(
             "image",
             compressedFile.name,
             requestImageFile
         )
-//        setProgress(0.68f)
         viewModelScope.launch {
             createProgressFlow(0.97f, 1000) // Update progress every second (adjust intervalMillis as needed)
                 .onEach { progress -> setProgress(progress) }

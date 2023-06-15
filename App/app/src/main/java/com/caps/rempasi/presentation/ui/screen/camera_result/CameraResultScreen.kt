@@ -11,7 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -70,7 +70,7 @@ fun CameraResultScreen(
                 ) {
                     ActionCameraButton(
                         icon = R.drawable.close,
-                        contentDescription = "Kembali"
+                        contentDescription = stringResource(R.string.cd_back)
                     ) {
                         navigateBack()
                     }
@@ -78,7 +78,7 @@ fun CameraResultScreen(
             }
             CaptureGuideline()
             Spacer(modifier = Modifier.height(16.dp))
-            ButtonLeadingIcon(textTitle = "Temukan Resep", icon = R.drawable.find_recipe) {
+            ButtonLeadingIcon(textTitle = stringResource(R.string.btn_find_recipe), icon = R.drawable.find_recipe) {
                 viewModel.postDataTest(imageResult!!)
             }
         }

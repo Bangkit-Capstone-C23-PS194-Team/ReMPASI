@@ -13,6 +13,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -21,6 +22,7 @@ import coil.compose.AsyncImage
 import com.caps.rempasi.presentation.ui.theme.ReMPASITheme
 import com.caps.rempasi.presentation.ui.theme.Typography
 import com.caps.rempasi.presentation.ui.theme.White
+import com.caps.rempasi.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -50,7 +52,7 @@ fun ItemSavedRecipe(
         ) {
             AsyncImage(
                 model = thumbnail,
-                contentDescription = "thumbnail $title",
+                contentDescription = stringResource(R.string.thumbnail, title),
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -68,7 +70,10 @@ fun ItemSavedRecipe(
             )
             Text(
                 modifier = Modifier.fillMaxWidth(),
-                text = "Bahan: ${description.joinToString(", ")}",
+                text = stringResource(
+                    R.string.ingredients_description,
+                    description.joinToString(", ")
+                ),
                 style = Typography.bodySmall,
                 maxLines = 3,
                 overflow = TextOverflow.Ellipsis,

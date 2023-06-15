@@ -9,10 +9,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.caps.rempasi.R
 import com.caps.rempasi.presentation.ui.theme.ReMPASITheme
 import com.caps.rempasi.presentation.ui.theme.Red
 import com.caps.rempasi.presentation.ui.theme.RedSecondary
@@ -33,12 +35,12 @@ fun ProgressDialog(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Deteksi Objek Sedang Berjalan",
+            text = stringResource(R.string.title_progress_dialog),
             style = Typography.headlineLarge,
             textAlign = TextAlign.Center,
         )
         Text(
-            text = "Menyajikan resep menu MPASI terbaik",
+            text = stringResource(R.string.description_progress_dialog),
             style = Typography.bodyMedium,
         )
 

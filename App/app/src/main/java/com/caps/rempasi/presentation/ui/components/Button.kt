@@ -14,8 +14,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.caps.rempasi.R
 import com.caps.rempasi.presentation.ui.theme.Red
 import com.caps.rempasi.presentation.ui.theme.Typography
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -58,7 +60,7 @@ fun ButtonEndIcon(
                 )
                 Icon(
                     imageVector = Icons.Default.ArrowForward,
-                    contentDescription = "Selanjutnya",
+                    contentDescription = stringResource(R.string.cd_next),
                     tint = Color.White
                 )
             }

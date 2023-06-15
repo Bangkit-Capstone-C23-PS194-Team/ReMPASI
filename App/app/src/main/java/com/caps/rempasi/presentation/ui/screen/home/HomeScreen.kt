@@ -3,7 +3,6 @@ package com.caps.rempasi.presentation.ui.screen.home
 import android.Manifest
 import android.net.Uri
 import android.os.Build
-import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -18,10 +17,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -62,8 +61,6 @@ fun HomeScreen(
 
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
-//    val configuration = LocalConfiguration.current
-//    val screenWidth = configuration.screenWidthDp.dp
     var previewView: PreviewView
 
     val launcherGallery =
@@ -117,7 +114,7 @@ fun HomeScreen(
                     ) {
                         ActionCameraButton(
                             icon = R.drawable.galery,
-                            contentDescription = "Buka Galeri"
+                            contentDescription = stringResource(R.string.cd_open_gallery)
                         ) {
                             val mediaType = ActivityResultContracts.PickVisualMedia.ImageOnly
                             launcherGallery.launch(PickVisualMediaRequest(mediaType))
@@ -147,13 +144,13 @@ fun HomeScreen(
                                 painter = painterResource(id = R.drawable.capture),
                                 modifier = Modifier
                                     .size(60.dp),
-                                contentDescription = "Menangkap Gambar",
+                                contentDescription = stringResource(R.string.cd_capture_image),
                                 tint = Color.White
                             )
                         }
                         ActionCameraButton(
                             icon = if (currentFlashMode == FLASH_MODE_ON) R.drawable.flash_on else R.drawable.flash_off,
-                            contentDescription = "Ubah cahaya latar kamera"
+                            contentDescription = stringResource(R.string.cd_flash_mode)
                         ) {
                             currentFlashMode = if (currentFlashMode == FLASH_MODE_ON) {
                                 FLASH_MODE_OFF

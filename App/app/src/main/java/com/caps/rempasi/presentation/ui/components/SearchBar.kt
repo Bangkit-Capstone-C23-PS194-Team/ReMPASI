@@ -11,8 +11,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
+import com.caps.rempasi.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -39,7 +41,7 @@ fun SearchBar(
             unfocusedIndicatorColor = Color.Transparent,
         ),
         placeholder = {
-            Text("Masukkan nama resep tersimpan")
+            Text(stringResource(R.string.placeholder_search))
         },
         modifier = modifier
             .fillMaxWidth()

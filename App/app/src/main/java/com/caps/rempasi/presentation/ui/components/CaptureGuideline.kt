@@ -5,8 +5,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.caps.rempasi.R
 import com.caps.rempasi.presentation.ui.theme.Typography
 
 @Composable
@@ -14,7 +16,7 @@ fun CaptureGuideline(
     modifier: Modifier = Modifier,
 ) {
     Text(
-        text = "Pastikan semua bahan makanan tidak saling menumpuk dan terlihat dalam kamera ya Moms",
+        text = stringResource(R.string.camera_guideline),
         style = Typography.bodyMedium.copy(
             lineHeight = 24.sp
         ),

@@ -7,9 +7,11 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.caps.rempasi.R
 import com.caps.rempasi.presentation.ui.components.JetTopAppBar
 import com.caps.rempasi.presentation.ui.navigation.NavigationGraph
 import com.caps.rempasi.presentation.ui.navigation.Screen
@@ -40,7 +42,7 @@ fun RempasiApp(
                 Screen.DetailRecipe.route -> {
                     JetTopAppBar(
                         showBackButton = true,
-                        pageTitle = "Detail Resep",
+                        pageTitle = stringResource(R.string.title_detail_page),
                         onBackClicked = {
                             navController.popBackStack()
                         }

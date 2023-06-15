@@ -82,7 +82,7 @@ class CameraRepositoryImpl @Inject constructor(
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
                     Toast.makeText(
                         context,
-                        "Gambar berhasil disimpan",
+                        context.getString(R.string.photo_saved_successfully),
                         Toast.LENGTH_LONG
                     ).show()
                     successCallback(outputFileResults.savedUri!!)
@@ -91,7 +91,7 @@ class CameraRepositoryImpl @Inject constructor(
                 override fun onError(exception: ImageCaptureException) {
                     Toast.makeText(
                         context,
-                        "Terjadi kesalahan ${exception.message}",
+                        context.getString(R.string.error_message, exception.message),
                         Toast.LENGTH_LONG
                     ).show()
                 }

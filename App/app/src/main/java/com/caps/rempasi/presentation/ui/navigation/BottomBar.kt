@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -29,17 +30,17 @@ fun BottomBar(
         val currentRoute = navBackStackEntry?.destination?.route
         val navigationItems = listOf(
             NavigationItem(
-                title = "Tersimpan",
+                title = stringResource(R.string.menu_saved),
                 icon = painterResource(id = R.drawable.bookmark),
                 screen = listOf(Screen.Saved)
             ),
             NavigationItem(
-                title = "Kamera",
+                title = stringResource(R.string.menu_camera),
                 icon = painterResource(id = R.drawable.camera_home),
                 screen = listOf(Screen.Home, Screen.CameraResult, Screen.RecommendationResult)
             ),
             NavigationItem(
-                title = "Profil",
+                title = stringResource(R.string.menu_profile),
                 icon = painterResource(id = R.drawable.account_circle),
                 screen = listOf(Screen.Profile)
             ),

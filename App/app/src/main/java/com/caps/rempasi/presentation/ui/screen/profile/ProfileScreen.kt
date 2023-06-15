@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -35,7 +36,7 @@ fun ProfileScreen(
     ) {
         AsyncImage(
             model = profile,
-            contentDescription = "Avatar",
+            contentDescription = stringResource(R.string.cd_avatar),
             modifier = Modifier
                 .border(2.dp, Red, CircleShape)
                 .padding(6.dp)
@@ -55,7 +56,7 @@ fun ProfileScreen(
             )
         )
         Spacer(modifier = Modifier.height(40.dp))
-        ButtonLeadingIcon(textTitle = "Keluar", icon = R.drawable.logout) {
+        ButtonLeadingIcon(textTitle = stringResource(R.string.btn_logout), icon = R.drawable.logout) {
             logOut()
         }
     }
