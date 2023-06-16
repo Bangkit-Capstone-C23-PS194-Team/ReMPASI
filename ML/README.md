@@ -11,4 +11,4 @@ All About Machine Learning
 ## Training Results
 
 mean Average Precision of 52,9 %
-![alt text](ML\mAP.png?raw=true)
+![alt text](https://github.com/MrFlinxy/ReMPASI/blob/ML_readme/ML/mAP.png?raw=true)
