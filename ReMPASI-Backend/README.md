@@ -6,7 +6,7 @@ All about ReMPASI API Backend Services, and Cloud resources diagram.
 
 ## Our Solution Framework
 
-Gallery will go here
+![gambar](https://github.com/Bangkit-Capstone-C23-PS194-Team/ReMPASI/assets/64621392/db3ea6d9-50dc-477c-8d2d-49131bc6d09c)
 
 ---
 
