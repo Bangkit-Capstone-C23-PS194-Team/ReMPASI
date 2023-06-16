@@ -1,6 +1,6 @@
 # ReMPASI Machine Learning
 
-All About Machine Learning
+All About ReMPASI Machine Learning
 
 ---
 
