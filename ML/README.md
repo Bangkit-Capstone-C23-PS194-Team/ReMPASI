@@ -14,7 +14,7 @@ All About Machine Learning
 ## Datasets
 
 Open Images Datasets V7 : https://storage.googleapis.com/openimages/web/visualizer/index.html?type=detection <br />
-![alt text](https://github.com/MrFlinxy/ReMPASI/blob/ML_readme/ML/mAP.png?raw=true)
+![alt text](https://github.com/MrFlinxy/ReMPASI/blob/ML_readme/ML/OIDV7.png?raw=true)
 
 Classes:
 
